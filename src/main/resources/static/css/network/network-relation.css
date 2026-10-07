@@ -1,0 +1,157 @@
+.relation-graph-summary {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    gap: 5px;
+    color: var(--muted);
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.relation-graph-summary strong {
+    color: var(--primary);
+    font-size: 24px;
+}
+
+.relation-graph-wrapper {
+    position: relative;
+    width: 100%;
+    min-height: 560px;
+    overflow: auto;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(34, 211, 238, 0.07),
+            transparent 46%
+        ),
+        #0d1628;
+    scrollbar-color: #526987 #0d1628;
+}
+
+.relation-graph-svg {
+    display: block;
+    width: 100%;
+    min-width: 850px;
+    height: 560px;
+}
+
+.relation-graph-svg .relation-edge {
+    fill: none;
+    stroke: #38bdf8;
+    stroke-width: 2px;
+    opacity: 0.65;
+    transition: opacity 0.2s, stroke-width 0.2s;
+}
+
+.relation-graph-svg .relation-edge.internal {
+    stroke: #34d399;
+}
+
+.relation-graph-svg .relation-edge.external {
+    stroke: #22d3ee;
+}
+
+.relation-graph-svg .relation-edge.suspicious {
+    stroke: #fb7185;
+}
+
+.relation-graph-svg .relation-node.local {
+    fill: #123b57;
+    stroke: #22d3ee;
+    stroke-width: 3px;
+}
+
+.relation-graph-svg .relation-node.remote {
+    fill: #17233b;
+    stroke: #94a3b8;
+    stroke-width: 2px;
+    cursor: pointer;
+}
+
+.relation-graph-svg .relation-node.remote.internal {
+    fill: #123d37;
+    stroke: #34d399;
+}
+
+.relation-graph-svg .relation-node.remote.external {
+    fill: #123b57;
+    stroke: #22d3ee;
+}
+
+.relation-graph-svg .relation-node.remote.suspicious {
+    fill: #542638;
+    stroke: #fb7185;
+    animation: suspicious-node-pulse 1.8s infinite;
+}
+
+@keyframes suspicious-node-pulse {
+    0%, 100% {
+        filter: drop-shadow(0 0 2px rgba(251, 113, 133, 0.3));
+    }
+
+    50% {
+        filter: drop-shadow(0 0 12px rgba(251, 113, 133, 0.85));
+    }
+}
+
+.relation-graph-svg .relation-local-label {
+    fill: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+    text-anchor: middle;
+    pointer-events: none;
+}
+
+.relation-graph-svg .relation-node-label {
+    fill: #e5edf8;
+    font-size: 12px;
+    font-weight: 700;
+    pointer-events: none;
+}
+
+.relation-graph-svg .relation-node-sub-label {
+    fill: #8fa0b8;
+    font-size: 11px;
+    text-anchor: middle;
+    pointer-events: none;
+}
+
+.relation-graph-empty {
+    display: none;
+    position: absolute;
+    inset: 0;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    font-size: 14px;
+    pointer-events: none;
+}
+
+.relation-graph-empty.is-visible {
+    display: flex;
+}
+
+.relation-graph-details {
+    min-height: 52px;
+    margin-top: 14px;
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: rgba(23, 35, 59, 0.8);
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+@media (max-width: 600px) {
+    .relation-graph-wrapper {
+        min-height: 420px;
+    }
+
+    .relation-graph-svg {
+        min-width: 760px;
+        height: 420px;
+    }
+}

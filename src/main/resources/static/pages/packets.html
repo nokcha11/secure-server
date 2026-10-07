@@ -1,0 +1,55 @@
+<section class="packet-workspace">
+
+    <div class="packet-workspace-header">
+        <div>
+            <h2>패킷 분석</h2>
+            <p>
+                패킷 통신 요약, 분석 그래프, 상세 데이터를 화면별로 나누어 확인합니다.
+            </p>
+        </div>
+    </div>
+
+    <nav class="packet-subnav" aria-label="패킷 분석 세부 메뉴">
+        <button
+            type="button"
+            class="packet-subnav-button active"
+            data-packet-view="summary">
+            통신 요약
+        </button>
+
+        <button
+            type="button"
+            class="packet-subnav-button"
+            data-packet-view="analysis">
+            통신 분석
+        </button>
+
+        <button
+            type="button"
+            class="packet-subnav-button"
+            data-packet-view="detail">
+            통신 상세
+        </button>
+    </nav>
+
+    <div
+        id="packetViewSummary"
+        class="packet-view"
+        data-packet-view-panel="summary">
+    </div>
+
+    <div
+        id="packetViewAnalysis"
+        class="packet-view"
+        data-packet-view-panel="analysis"
+        hidden>
+    </div>
+
+    <div
+        id="packetViewDetail"
+        class="packet-view"
+        data-packet-view-panel="detail"
+        hidden>
+    </div>
+
+</section>

@@ -1,0 +1,134 @@
+<section class="overview-page">
+    <div class="overview-header">
+        <div>
+            <h2>통합 관제</h2>
+            <p>선택한 PC의 시스템 상태, 열린 포트, 네트워크 연결과 패킷 수집 현황을 한 화면에서 요약합니다.</p>
+        </div>
+
+        <div class="overview-controls">
+            <select id="overviewComputerSelect" aria-label="통합 관제 PC 선택">
+                <option value="">PC 정보를 불러오는 중입니다.</option>
+            </select>
+            <button id="overviewRefreshButton" type="button">새로고침</button>
+        </div>
+    </div>
+
+    <div class="overview-last-collected" id="overviewLastCollectedAt">마지막 수집 시각: -</div>
+
+    <div class="overview-summary-grid">
+        <article class="overview-summary-card">
+            <span>에이전트 상태</span>
+            <strong id="overviewAgentStatus">확인 중</strong>
+            <small id="overviewAgentComputerName">-</small>
+        </article>
+
+        <article class="overview-summary-card">
+            <span>열린 포트</span>
+            <strong id="overviewOpenPortCount">0</strong>
+            <small>현재 수집된 포트</small>
+        </article>
+
+        <article class="overview-summary-card">
+            <span>주의/위험 포트</span>
+            <strong id="overviewRiskPortCount">0</strong>
+            <small>CAUTION + DANGER</small>
+        </article>
+
+        <article class="overview-summary-card">
+            <span>현재 연결</span>
+            <strong id="overviewConnectionCount">0</strong>
+            <small>네트워크 연결</small>
+        </article>
+
+        <article class="overview-summary-card">
+            <span>의심 연결</span>
+            <strong id="overviewSuspiciousCount">0</strong>
+            <small>보안 규칙 탐지</small>
+        </article>
+
+        <article class="overview-summary-card">
+            <span>패킷 메타데이터</span>
+            <strong id="overviewPacketCount">0</strong>
+            <small>최근 수집 건수</small>
+        </article>
+    </div>
+
+    <div class="overview-state-grid">
+        <article class="overview-state-card">
+            <div class="overview-state-header">
+                <div>
+                    <h3>포트 보안 상태</h3>
+                    <p>수집된 열린 포트 위험도를 집계합니다.</p>
+                </div>
+                <span id="overviewPortStateBadge" class="overview-state-badge">확인 중</span>
+            </div>
+            <dl class="overview-metric-list">
+                <div><dt>정상</dt><dd id="overviewNormalPortCount">0</dd></div>
+                <div><dt>주의</dt><dd id="overviewCautionPortCount">0</dd></div>
+                <div><dt>위험</dt><dd id="overviewDangerPortCount">0</dd></div>
+            </dl>
+        </article>
+
+        <article class="overview-state-card">
+            <div class="overview-state-header">
+                <div>
+                    <h3>네트워크 연결 상태</h3>
+                    <p>현재 연결의 외부 통신과 의심 연결을 확인합니다.</p>
+                </div>
+                <span id="overviewNetworkStateBadge" class="overview-state-badge">확인 중</span>
+            </div>
+            <dl class="overview-metric-list">
+                <div><dt>현재 연결</dt><dd id="overviewCurrentConnectionCount">0</dd></div>
+                <div><dt>외부 연결</dt><dd id="overviewExternalConnectionCount">0</dd></div>
+                <div><dt>의심 연결</dt><dd id="overviewNetworkSuspiciousCount">0</dd></div>
+            </dl>
+        </article>
+
+        <article class="overview-state-card">
+            <div class="overview-state-header">
+                <div>
+                    <h3>패킷 수집 상태</h3>
+                    <p>패킷 메타데이터와 외부 통신 수집 현황입니다.</p>
+                </div>
+                <span id="overviewPacketStateBadge" class="overview-state-badge">확인 중</span>
+            </div>
+            <dl class="overview-metric-list">
+                <div><dt>메타데이터</dt><dd id="overviewPacketMetadataCount">0</dd></div>
+                <div><dt>외부 통신</dt><dd id="overviewPacketExternalCount">0</dd></div>
+                <div><dt>DNS 도메인</dt><dd id="overviewPacketDomainCount">0</dd></div>
+            </dl>
+        </article>
+    </div>
+
+    <section class="overview-risk-panel">
+        <div class="overview-panel-header">
+            <div>
+                <h3>우선 확인 항목</h3>
+                <p>위험/주의 포트와 의심 네트워크 연결을 우선순위로 표시합니다.</p>
+            </div>
+            <strong id="overviewRiskItemCount">0건</strong>
+        </div>
+        <div id="overviewRiskList" class="overview-risk-list">
+            <div class="overview-empty">현재 표시할 위험 항목이 없습니다.</div>
+        </div>
+    </section>
+
+    <section class="overview-shortcuts">
+        <button type="button" data-overview-target="ports">
+            <strong>포트 분석</strong>
+            <span>열린 포트와 위험 판정 상세 확인</span>
+        </button>
+        <button type="button" data-overview-target="connections">
+            <strong>연결 분석</strong>
+            <span>현재/종료 연결과 선택 항목 분석</span>
+        </button>
+        <button type="button" data-overview-target="packets">
+            <strong>패킷 분석</strong>
+            <span>패킷 메타데이터와 통신 차트 확인</span>
+        </button>
+        <button type="button" class="admin-only-action" data-overview-target="remote-diagnostic" hidden>
+            <strong>원격 진단</strong>
+            <span>ADMIN 원격 보안 진단 실행</span>
+        </button>
+    </section>
+</section>

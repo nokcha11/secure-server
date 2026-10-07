@@ -1,0 +1,665 @@
+/* ========================================
+   SecureAgent 리팩토링 공통 화면 구조
+   ======================================== */
+
+
+/* 전체 화면 */
+
+.app-layout {
+    display: flex;
+
+    width: 100%;
+    min-width: 0;
+}
+
+
+/* ========================================
+   왼쪽 사이드바
+   ======================================== */
+
+.sidebar {
+    flex: 0 0 250px;
+
+    width: 250px;
+    min-height: calc(100vh - 100px);
+
+    padding: 24px 16px;
+
+    border-right: 1px solid var(--border);
+
+    background: rgba(11, 17, 32, 0.97);
+}
+
+
+/* 사이드바 로고 영역 */
+
+.sidebar-header {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+
+    padding: 0 12px 22px;
+    margin-bottom: 18px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.sidebar-brand {
+    color: var(--primary);
+
+    font-size: 19px;
+    font-weight: 800;
+}
+
+.sidebar-subtitle {
+    color: var(--muted);
+
+    font-size: 11px;
+    letter-spacing: 0.7px;
+}
+
+
+/* 메뉴 그룹 */
+
+.sidebar-group {
+    margin-bottom: 26px;
+}
+
+.sidebar-group-title {
+    margin: 0 0 9px;
+    padding: 0 12px;
+
+    color: #667892;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 0.7px;
+}
+
+
+/* 메뉴 버튼 */
+
+.sidebar-menu {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+
+    gap: 11px;
+
+    padding: 11px 12px;
+    margin: 3px 0;
+
+    border: 1px solid transparent;
+    border-radius: 9px;
+
+    background: transparent;
+    color: var(--muted);
+
+    font-size: 14px;
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.sidebar-menu:hover {
+    border-color: rgba(56, 189, 248, 0.18);
+
+    background: rgba(56, 189, 248, 0.08);
+    color: var(--text);
+}
+
+
+/* 현재 선택된 메뉴 */
+
+.sidebar-menu.active {
+    border-color: rgba(56, 189, 248, 0.25);
+
+    background: rgba(56, 189, 248, 0.12);
+    color: var(--primary);
+
+    font-weight: 700;
+}
+
+
+/* 메뉴 아이콘 */
+
+.sidebar-menu-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 28px;
+
+    width: 28px;
+    height: 28px;
+
+    border-radius: 7px;
+
+    background: rgba(143, 160, 184, 0.08);
+
+    font-size: 11px;
+    font-weight: 800;
+}
+
+
+/* ========================================
+   오른쪽 기존 대시보드
+   ======================================== */
+
+.app-layout > .dashboard-container {
+    flex: 1 1 auto;
+
+    width: auto;
+    max-width: none;
+    min-width: 0;
+
+    margin: 30px 3% 50px;
+}
+
+
+/* ========================================
+   현재 로그인 계정 표시
+   ======================================== */
+
+.current-account-info {
+    display: flex;
+    align-items: center;
+
+    flex: 0 0 auto;
+    min-width: 150px;
+
+    gap: 9px;
+
+    padding: 7px 12px;
+
+    border: 1px solid rgba(56, 189, 248, 0.22);
+    border-radius: 10px;
+
+    background: rgba(56, 189, 248, 0.06);
+
+    white-space: nowrap;
+}
+
+
+/* 로그인 상태 초록 점 */
+
+.current-account-dot {
+    flex: 0 0 auto;
+
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #34d399;
+
+    box-shadow:
+        0 0 0 4px rgba(52, 211, 153, 0.08);
+}
+
+
+/* 계정 텍스트 */
+
+.current-account-text {
+    display: flex;
+    flex-direction: column;
+
+    gap: 2px;
+}
+
+.current-account-status {
+    color: var(--muted);
+
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.current-account-summary {
+    color: var(--text);
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.current-account-divider {
+    margin: 0 3px;
+
+    color: var(--muted);
+}
+
+
+/* ========================================
+   계정 드롭다운 / 권한 / 관리 화면
+   ======================================== */
+
+.admin-only-menu[hidden],
+.admin-only-action[hidden],
+#adminResponseGroup[hidden],
+.account-dropdown[hidden] {
+    display: none !important;
+}
+
+.dashboard-placeholder-panel,
+.account-page-panel,
+.user-management-panel {
+    padding: 24px;
+}
+
+.account-menu-wrapper {
+    position: relative;
+}
+
+.current-account-toggle {
+    appearance: none;
+
+    border: 1px solid rgba(56, 189, 248, 0.24);
+
+    font: inherit;
+    text-align: left;
+
+    cursor: pointer;
+}
+
+.current-account-toggle:hover,
+.current-account-toggle[aria-expanded="true"] {
+    border-color: rgba(56, 189, 248, 0.5);
+
+    background: rgba(56, 189, 248, 0.11);
+}
+
+
+/* ========================================
+   계정 드롭다운 화살표 강조
+   ======================================== */
+
+.account-menu-chevron {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 30px;
+
+    width: 30px;
+    height: 30px;
+
+    margin-left: 9px;
+
+    border: 1px solid rgba(103, 232, 249, 0.3);
+    border-radius: 9px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(34, 211, 238, 0.15),
+            rgba(59, 130, 246, 0.08)
+        );
+
+    color: #67e8f9;
+
+    font-size: 15px;
+    font-weight: 900;
+    line-height: 1;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        0 0 16px rgba(34, 211, 238, 0.08);
+
+    transition:
+        transform 0.2s ease,
+        color 0.18s ease,
+        border-color 0.18s ease,
+        background 0.18s ease,
+        box-shadow 0.18s ease;
+}
+
+
+/* 마우스를 올렸을 때 */
+
+.current-account-toggle:hover .account-menu-chevron,
+.current-account-toggle:focus-visible .account-menu-chevron,
+.current-account-toggle[aria-expanded="true"] .account-menu-chevron {
+    border-color: rgba(103, 232, 249, 0.58);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(34, 211, 238, 0.24),
+            rgba(59, 130, 246, 0.13)
+        );
+
+    color: #ecfeff;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        0 0 22px rgba(34, 211, 238, 0.16);
+}
+
+
+/* 계정 메뉴가 열렸을 때 화살표 방향 변경 */
+
+.current-account-toggle[aria-expanded="true"]
+.account-menu-chevron {
+    transform:
+        rotate(180deg)
+        scale(1.04);
+}
+
+
+/* ========================================
+   계정 드롭다운
+   ======================================== */
+
+.account-dropdown {
+    position: absolute;
+
+    top: calc(100% + 10px);
+    right: 0;
+
+    z-index: 1500;
+
+    width: 240px;
+
+    padding: 10px;
+
+    border: 1px solid rgba(56, 189, 248, 0.22);
+    border-radius: 12px;
+
+    background: rgba(11, 17, 32, 0.98);
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.45);
+
+    backdrop-filter:
+        blur(14px);
+}
+
+.account-dropdown-header {
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+
+    padding: 9px 10px 11px;
+}
+
+.account-dropdown-label {
+    color: var(--muted);
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.account-dropdown-user {
+    color: var(--text);
+
+    font-size: 13px;
+}
+
+.account-dropdown-divider {
+    height: 1px;
+
+    margin: 6px 4px;
+
+    background: var(--border);
+}
+
+.account-dropdown-item {
+    width: 100%;
+
+    padding: 10px 11px;
+
+    border: 0;
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: #cbd5e1;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    text-align: left;
+
+    cursor: pointer;
+}
+
+.account-dropdown-item:hover {
+    background: rgba(56, 189, 248, 0.09);
+
+    color: #f8fafc;
+}
+
+.account-dropdown-logout {
+    color: #fda4af;
+}
+
+
+/* ========================================
+   내 계정 화면
+   ======================================== */
+
+.account-page-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0, 1fr)
+        );
+
+    gap: 14px;
+}
+
+.account-page-card {
+    min-width: 0;
+
+    padding: 18px;
+
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    background: rgba(23, 35, 59, 0.72);
+}
+
+.account-page-label {
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.account-page-card strong {
+    color: var(--text);
+
+    font-size: 18px;
+}
+
+.account-page-action-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 24px;
+
+    margin-top: 16px;
+    padding: 20px;
+
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-radius: 12px;
+
+    background: rgba(56, 189, 248, 0.045);
+}
+
+.account-page-action-card h3,
+.user-management-card h3 {
+    margin: 0 0 7px;
+
+    color: var(--text);
+
+    font-size: 15px;
+}
+
+.account-page-action-card p,
+.user-management-card p {
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 12px;
+    line-height: 1.65;
+}
+
+.account-page-primary-button,
+.user-management-action-button {
+    flex: 0 0 auto;
+
+    min-height: 40px;
+
+    padding: 0 15px;
+
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    border-radius: 9px;
+
+    background: rgba(56, 189, 248, 0.12);
+
+    color: #bae6fd;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+.account-page-primary-button:hover,
+.user-management-action-button:hover {
+    border-color: rgba(56, 189, 248, 0.65);
+
+    background: rgba(56, 189, 248, 0.2);
+
+    color: #f0f9ff;
+}
+
+
+/* ========================================
+   사용자 관리
+   ======================================== */
+
+.user-management-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
+
+    gap: 14px;
+}
+
+.user-management-card {
+    display: grid;
+
+    grid-template-columns:
+        auto
+        minmax(0, 1fr);
+
+    align-items: start;
+
+    gap: 14px;
+
+    padding: 20px;
+
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    background: rgba(23, 35, 59, 0.7);
+}
+
+.user-management-card-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 10px;
+
+    background: rgba(56, 189, 248, 0.09);
+
+    color: #67e8f9;
+
+    font-size: 11px;
+    font-weight: 900;
+}
+
+.user-management-card-content {
+    min-width: 0;
+}
+
+.user-management-action-button {
+    grid-column: 1 / -1;
+
+    justify-self: start;
+
+    margin-top: 2px;
+}
+
+.user-management-guide {
+    margin-top: 16px;
+
+    padding: 14px 16px;
+
+    border: 1px solid rgba(129, 140, 248, 0.2);
+    border-radius: 10px;
+
+    background: rgba(99, 102, 241, 0.055);
+
+    color: var(--muted);
+
+    font-size: 12px;
+    line-height: 1.65;
+}
+
+
+/* ========================================
+   반응형
+   ======================================== */
+
+@media (max-width: 900px) {
+    .account-page-grid,
+    .user-management-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .account-page-action-card {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 600px) {
+    .account-dropdown {
+        right: auto;
+        left: 0;
+
+        width:
+            min(
+                280px,
+                calc(100vw - 32px)
+            );
+    }
+}

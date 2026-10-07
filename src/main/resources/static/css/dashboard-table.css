@@ -1,0 +1,161 @@
+/* SecureAgent 표와 스크롤 */
+
+
+/* 표 외부 스크롤 영역 */
+
+.table-container,
+.table-wrapper {
+    display: block;
+
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    height: 500px;
+
+    overflow: auto;
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    background: rgba(11, 17, 32, 0.28);
+
+    scrollbar-color: #526987 #0d1628;
+}
+
+.table-container table {
+    width: 100%;
+    min-width: 1500px;
+    border-collapse: collapse;
+}
+
+.network-table {
+    width: 2100px;
+    min-width: 2100px;
+    border-collapse: collapse;
+}
+
+thead {
+    background: #17243c;
+}
+
+.table-container thead,
+.table-wrapper thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.table-container th,
+.table-wrapper th {
+    background: #17243c;
+}
+
+th {
+    padding: 14px 16px;
+
+    color: #b7c5d8;
+    font-size: 13px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+td {
+    padding: 14px 16px;
+
+    border-top: 1px solid var(--border);
+
+    color: #dbe6f3;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+tbody tr:hover {
+    background: rgba(56, 189, 248, 0.08);
+}
+
+
+/* 공통 스크롤바 */
+
+.table-container::-webkit-scrollbar,
+.table-wrapper::-webkit-scrollbar,
+.hourly-chart-scroll::-webkit-scrollbar,
+.relation-graph-wrapper::-webkit-scrollbar {
+    width: 13px;
+    height: 13px;
+}
+
+.table-container::-webkit-scrollbar-track,
+.table-wrapper::-webkit-scrollbar-track,
+.hourly-chart-scroll::-webkit-scrollbar-track,
+.relation-graph-wrapper::-webkit-scrollbar-track {
+    background: #0d1628;
+}
+
+.table-container::-webkit-scrollbar-thumb,
+.table-wrapper::-webkit-scrollbar-thumb,
+.hourly-chart-scroll::-webkit-scrollbar-thumb,
+.relation-graph-wrapper::-webkit-scrollbar-thumb {
+    border: 2px solid #0d1628;
+    border-radius: 10px;
+    background: #526987;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover,
+.table-wrapper::-webkit-scrollbar-thumb:hover,
+.hourly-chart-scroll::-webkit-scrollbar-thumb:hover,
+.relation-graph-wrapper::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}
+
+
+/* 열린 포트 표 셀 */
+
+.service-cell {
+    color: #7dd3fc;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.risk-reason-cell {
+    min-width: 300px;
+    color: #c6d2e3;
+    line-height: 1.45;
+}
+
+.date-cell {
+    min-width: 190px;
+    white-space: nowrap;
+}
+
+.risk-row-caution {
+    background: rgba(245, 158, 11, 0.05);
+}
+
+.risk-row-danger {
+    background: rgba(251, 113, 133, 0.09);
+}
+
+
+/* 태블릿 */
+
+@media (max-width: 1000px) {
+    .table-container,
+    .table-wrapper {
+        height: 460px;
+    }
+}
+
+
+/* 모바일 */
+
+@media (max-width: 600px) {
+    .table-container,
+    .table-wrapper {
+        height: 400px;
+    }
+
+    .network-table {
+        width: 1900px;
+        min-width: 1900px;
+    }
+}

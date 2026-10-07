@@ -1,0 +1,741 @@
+/* ========================================
+   SecureAgent
+   에이전트 상태 화면
+   ======================================== */
+
+
+/* ========================================
+   에이전트 수집 상태 패널
+   ======================================== */
+
+.agent-health-panel {
+    margin-top: 22px;
+
+    padding: 24px;
+
+    overflow: hidden;
+}
+
+
+/* ========================================
+   패널 상단
+   ======================================== */
+
+.agent-health-header {
+    display: flex;
+
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 24px;
+
+    margin-bottom: 22px;
+}
+
+
+.agent-health-title-row {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+}
+
+
+.agent-health-title-row h2 {
+    margin: 0;
+
+    color: var(--text);
+
+    font-size: 20px;
+}
+
+
+.agent-health-header p {
+    margin: 7px 0 0;
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+/* ========================================
+   전체 수집 상태 배지
+   ======================================== */
+
+.agent-collection-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    min-height: 28px;
+
+    padding: 0 10px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 999px;
+
+    background: rgba(148, 163, 184, 0.06);
+
+    color: var(--muted);
+
+    font-size: 11px;
+    font-weight: 800;
+}
+
+
+.agent-collection-badge-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #64748b;
+}
+
+
+.agent-collection-badge.has-data {
+    border-color:
+        rgba(52, 211, 153, 0.28);
+
+    background:
+        rgba(52, 211, 153, 0.075);
+
+    color: #6ee7b7;
+}
+
+
+.agent-collection-badge.has-data
+.agent-collection-badge-dot {
+    background: #34d399;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(52, 211, 153, 0.08),
+
+        0 0 13px
+        rgba(52, 211, 153, 0.18);
+}
+
+
+.agent-collection-badge.no-data {
+    border-color:
+        rgba(251, 113, 133, 0.24);
+
+    background:
+        rgba(251, 113, 133, 0.065);
+
+    color: #fda4af;
+}
+
+
+.agent-collection-badge.no-data
+.agent-collection-badge-dot {
+    background: #fb7185;
+}
+
+
+/* ========================================
+   최근 데이터 표시
+   ======================================== */
+
+.agent-health-latest {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-end;
+
+    gap: 6px;
+
+    flex: 0 0 auto;
+
+    min-width: 130px;
+}
+
+
+.agent-health-latest span {
+    color: var(--muted);
+
+    font-size: 11px;
+}
+
+
+.agent-health-latest strong {
+    color: #67e8f9;
+
+    font-size: 15px;
+}
+
+
+/* ========================================
+   4개 상태 카드
+   ======================================== */
+
+.agent-health-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            4,
+            minmax(0, 1fr)
+        );
+
+    gap: 15px;
+}
+
+
+.agent-health-card {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+    min-height: 190px;
+
+    padding: 18px;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        rgba(38, 53, 82, 0.95);
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(23, 35, 59, 0.88),
+            rgba(15, 28, 48, 0.92)
+        );
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.agent-health-card::after {
+    content: "";
+
+    position: absolute;
+
+    top: -55px;
+    right: -55px;
+
+    width: 130px;
+    height: 130px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(56, 189, 248, 0.10),
+            transparent 68%
+        );
+
+    pointer-events: none;
+}
+
+
+.agent-health-card:hover {
+    transform:
+        translateY(-2px);
+
+    border-color:
+        rgba(56, 189, 248, 0.26);
+
+    box-shadow:
+        0 14px 28px
+        rgba(0, 0, 0, 0.16);
+}
+
+
+.agent-card-main {
+    border-color:
+        rgba(52, 211, 153, 0.20);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(17, 50, 54, 0.38),
+            rgba(15, 28, 48, 0.94)
+        );
+}
+
+
+/* ========================================
+   카드 상단
+   ======================================== */
+
+.agent-health-card-top {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-bottom: 18px;
+}
+
+
+.agent-health-icon {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 38px;
+    height: 38px;
+
+    flex: 0 0 38px;
+
+    border-radius: 11px;
+
+    border:
+        1px solid
+        rgba(56, 189, 248, 0.16);
+
+    background:
+        rgba(56, 189, 248, 0.08);
+
+    color: #7dd3fc;
+
+    font-size: 12px;
+    font-weight: 900;
+
+    box-shadow:
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.06);
+}
+
+
+.agent-icon {
+    border-color:
+        rgba(52, 211, 153, 0.20);
+
+    background:
+        rgba(52, 211, 153, 0.09);
+
+    color: #6ee7b7;
+}
+
+
+.port-icon {
+    color: #93c5fd;
+}
+
+
+.network-icon {
+    color: #67e8f9;
+}
+
+
+.packet-icon {
+    color: #a5b4fc;
+}
+
+
+/* ========================================
+   카드 상태 라벨
+   ======================================== */
+
+.agent-health-state {
+    display: inline-flex;
+
+    align-items: center;
+
+    min-height: 25px;
+
+    padding: 0 9px;
+
+    border-radius: 999px;
+
+    border:
+        1px solid
+        rgba(148, 163, 184, 0.12);
+
+    background:
+        rgba(148, 163, 184, 0.06);
+
+    color: var(--muted);
+
+    font-size: 10px;
+    font-weight: 800;
+}
+
+
+.agent-health-state.has-data {
+    border-color:
+        rgba(52, 211, 153, 0.24);
+
+    background:
+        rgba(52, 211, 153, 0.075);
+
+    color: #6ee7b7;
+}
+
+
+.agent-health-state.no-data {
+    border-color:
+        rgba(251, 113, 133, 0.20);
+
+    background:
+        rgba(251, 113, 133, 0.06);
+
+    color: #fda4af;
+}
+
+
+/* ========================================
+   카드 본문
+   ======================================== */
+
+.agent-health-card-body {
+    flex: 1 1 auto;
+
+    min-width: 0;
+}
+
+
+.agent-health-card-label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+.agent-health-card-value {
+    display: block;
+
+    margin-bottom: 7px;
+
+    overflow: hidden;
+
+    color: #f8fafc;
+
+    font-size: 25px;
+    font-weight: 800;
+
+    letter-spacing: -0.4px;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+.agent-status-value {
+    color: #6ee7b7;
+
+    font-size: 19px;
+}
+
+
+.agent-health-card-body p {
+    margin: 0;
+
+    color: #7f91aa;
+
+    font-size: 11px;
+
+    line-height: 1.55;
+}
+
+
+/* ========================================
+   카드 내부 바로가기
+   ======================================== */
+
+.agent-health-link {
+    display: inline-flex;
+
+    align-items: center;
+
+    align-self: flex-start;
+
+    gap: 6px;
+
+    margin-top: 14px;
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+
+    color: #7dd3fc;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        color 0.18s ease,
+        gap 0.18s ease;
+}
+
+
+.agent-health-link:hover {
+    gap: 9px;
+
+    color: #cffafe;
+}
+
+
+/* ========================================
+   최근 수집 정보
+   ======================================== */
+
+.agent-collection-history {
+    margin-top: 18px;
+
+    padding: 18px;
+
+    border:
+        1px solid
+        rgba(38, 53, 82, 0.86);
+
+    border-radius: 13px;
+
+    background:
+        rgba(9, 18, 34, 0.48);
+}
+
+
+.agent-collection-history-header {
+    display: flex;
+
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 18px;
+
+    margin-bottom: 16px;
+}
+
+
+.agent-collection-history-header h3 {
+    margin: 0;
+
+    color: var(--text);
+
+    font-size: 14px;
+}
+
+
+.agent-collection-history-header p {
+    margin: 5px 0 0;
+
+    color: var(--muted);
+
+    font-size: 11px;
+}
+
+
+.agent-collection-basis {
+    flex: 0 0 auto;
+
+    padding: 6px 9px;
+
+    border:
+        1px solid
+        rgba(56, 189, 248, 0.15);
+
+    border-radius: 999px;
+
+    background:
+        rgba(56, 189, 248, 0.055);
+
+    color: #7dd3fc;
+
+    font-size: 9px;
+    font-weight: 800;
+}
+
+
+/* ========================================
+   최근 수집 4열
+   ======================================== */
+
+.agent-collection-timeline {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            4,
+            minmax(0, 1fr)
+        );
+
+    gap: 10px;
+}
+
+
+.agent-collection-item {
+    min-width: 0;
+
+    padding: 13px 14px;
+
+    border:
+        1px solid
+        rgba(38, 53, 82, 0.70);
+
+    border-radius: 10px;
+
+    background:
+        rgba(23, 35, 59, 0.42);
+}
+
+
+.agent-collection-item-heading {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-bottom: 9px;
+
+    color: #a9b9cc;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+
+.agent-timeline-dot {
+    width: 7px;
+    height: 7px;
+
+    flex: 0 0 7px;
+
+    border-radius: 50%;
+
+    background: #64748b;
+}
+
+
+.system-dot {
+    background: #34d399;
+}
+
+
+.port-dot {
+    background: #60a5fa;
+}
+
+
+.network-dot {
+    background: #22d3ee;
+}
+
+
+.packet-dot {
+    background: #818cf8;
+}
+
+
+.agent-collection-item strong {
+    display: block;
+
+    overflow: hidden;
+
+    color: #e5edf8;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+.agent-collection-relative {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #71849f;
+
+    font-size: 9px;
+}
+
+
+/* ========================================
+   하단 안내
+   ======================================== */
+
+.agent-health-footnote {
+    margin: 13px 2px 0;
+
+    color: #63758f;
+
+    font-size: 10px;
+
+    line-height: 1.55;
+}
+
+
+/* ========================================
+   태블릿
+   ======================================== */
+
+@media (max-width: 1200px) {
+
+    .agent-health-grid,
+    .agent-collection-timeline {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+    }
+
+}
+
+
+/* ========================================
+   모바일
+   ======================================== */
+
+@media (max-width: 720px) {
+
+    .agent-health-header {
+        flex-direction: column;
+    }
+
+
+    .agent-health-latest {
+        align-items: flex-start;
+    }
+
+
+    .agent-health-grid,
+    .agent-collection-timeline {
+        grid-template-columns: 1fr;
+    }
+
+
+    .agent-collection-history-header {
+        flex-direction: column;
+    }
+
+}

@@ -1,0 +1,114 @@
+<section class="panel packet-detail-panel">
+
+    <div class="panel-header">
+
+        <div>
+            <h2>패킷 통신 상세</h2>
+
+            <p>
+                선택한 PC에서 수집된 DNS·HTTP·HTTPS
+                통신 정보를 확인합니다.
+            </p>
+        </div>
+
+        <span id="packetDetailStatus">
+            패킷 상세 조회 대기
+        </span>
+
+    </div>
+
+    <div class="packet-toolbar">
+
+        <div
+            class="packet-filter-area"
+            role="group"
+            aria-label="패킷 통신 종류 필터">
+
+            <button
+                type="button"
+                class="packet-filter-button active"
+                data-packet-filter="ALL"
+                aria-pressed="true">
+                전체
+            </button>
+
+            <button
+                type="button"
+                class="packet-filter-button"
+                data-packet-filter="DNS"
+                aria-pressed="false">
+                DNS
+            </button>
+
+            <button
+                type="button"
+                class="packet-filter-button"
+                data-packet-filter="HTTP"
+                aria-pressed="false">
+                HTTP
+            </button>
+
+            <button
+                type="button"
+                class="packet-filter-button"
+                data-packet-filter="HTTPS"
+                aria-pressed="false">
+                HTTPS
+            </button>
+
+        </div>
+
+        <div class="packet-search-area">
+
+            <input
+                type="search"
+                id="packetSearchInput"
+                class="packet-search-input"
+                placeholder="상대방 IP, 포트, 도메인 검색"
+                aria-label="패킷 통신 검색"
+                autocomplete="off"
+                spellcheck="false">
+
+            <button
+                type="button"
+                id="packetSearchClearButton"
+                class="packet-search-clear-button">
+                초기화
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="packet-table-wrapper">
+
+        <table class="packet-detail-table">
+
+            <thead>
+                <tr>
+                    <th>수신 시각</th>
+                    <th>구분</th>
+                    <th>방향</th>
+                    <th>상대방 IP</th>
+                    <th>상대방 포트</th>
+                    <th>확인된 도메인</th>
+                    <th>패킷 수</th>
+                    <th>통신량</th>
+                </tr>
+            </thead>
+
+            <tbody id="packetDetailTableBody">
+
+                <tr class="packet-empty-row">
+                    <td colspan="8">
+                        PC를 선택하면 패킷 통신 정보가 표시됩니다.
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>

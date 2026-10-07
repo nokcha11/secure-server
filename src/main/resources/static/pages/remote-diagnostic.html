@@ -1,0 +1,142 @@
+<!-- ADMIN 전용 OpenSSH 원격 진단 -->
+<section
+    id="remoteDiagnosticSection"
+    class="panel remote-diagnostic-panel"
+    hidden>
+
+    <div class="panel-header">
+        <div>
+            <h2>OpenSSH 원격 진단</h2>
+            <p>
+                서버에 등록된 대상에만 접속하여
+                허용된 안전 진단 명령을 실행합니다.
+            </p>
+        </div>
+
+        <span class="remote-diagnostic-admin-badge">
+            ADMIN 전용
+        </span>
+    </div>
+
+    <form
+        id="remoteDiagnosticForm"
+        class="remote-diagnostic-form"
+        autocomplete="off">
+
+        <div class="remote-diagnostic-field">
+            <label for="remoteDiagnosticHost">대상 서버 주소</label>
+            <input
+                id="remoteDiagnosticHost"
+                name="host"
+                type="text"
+                value="127.0.0.1"
+                placeholder="예: 192.168.0.25"
+                required>
+        </div>
+
+        <div class="remote-diagnostic-field">
+            <label for="remoteDiagnosticPort">SSH 포트</label>
+            <input
+                id="remoteDiagnosticPort"
+                name="port"
+                type="number"
+                value="22"
+                min="1"
+                max="65535"
+                required>
+        </div>
+
+        <div class="remote-diagnostic-field">
+            <label for="remoteDiagnosticUsername">SSH 사용자 이름</label>
+            <input
+                id="remoteDiagnosticUsername"
+                name="username"
+                type="text"
+                value="yoko"
+                placeholder="예: yoko"
+                autocomplete="username"
+                required>
+        </div>
+
+        <div class="remote-diagnostic-field">
+            <label for="remoteDiagnosticCommand">진단 명령</label>
+            <select
+                id="remoteDiagnosticCommand"
+                name="commandType"
+                required>
+
+                <option value="HOSTNAME">
+                    PC 이름 확인 (hostname)
+                </option>
+
+                <option value="CURRENT_USER">
+                    현재 사용자 확인 (whoami)
+                </option>
+
+                <option value="IP_CONFIGURATION">
+                    IP 설정 확인 (ipconfig)
+                </option>
+
+                <option value="NETWORK_CONNECTIONS">
+                    네트워크 연결 확인 (netstat -ano)
+                </option>
+            </select>
+        </div>
+
+        <div class="remote-diagnostic-actions">
+            <button
+                id="remoteDiagnosticSubmitButton"
+                class="remote-diagnostic-submit-button"
+                type="submit">
+                진단 실행
+            </button>
+        </div>
+    </form>
+
+    <p
+        id="remoteDiagnosticStatus"
+        class="remote-diagnostic-status"
+        role="status"
+        aria-live="polite">
+    </p>
+
+    <div class="remote-diagnostic-result-layout">
+
+        <div class="remote-diagnostic-result">
+            <div class="remote-diagnostic-result-header">
+                <h3>진단 결과</h3>
+                <span id="remoteDiagnosticResultMeta">실행 전</span>
+            </div>
+
+            <pre
+                id="remoteDiagnosticOutput"
+                class="remote-diagnostic-output">아직 실행된 진단이 없습니다.</pre>
+        </div>
+
+        <aside class="remote-diagnostic-summary" aria-label="원격 진단 요약">
+            <div class="remote-diagnostic-summary-header">
+                <div>
+                    <span>RESULT SUMMARY</span>
+                    <h3>진단 요약</h3>
+                </div>
+
+                <strong
+                    id="remoteDiagnosticSummaryStatus"
+                    class="remote-diagnostic-summary-status">
+                    대기
+                </strong>
+            </div>
+
+            <div
+                id="remoteDiagnosticSummaryCards"
+                class="remote-diagnostic-summary-cards">
+
+                <div class="remote-summary-empty">
+                    진단을 실행하면 핵심 결과를 이 영역에서 바로 확인할 수 있습니다.
+                </div>
+            </div>
+        </aside>
+
+    </div>
+
+</section>

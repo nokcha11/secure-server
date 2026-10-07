@@ -1,0 +1,955 @@
+@charset "UTF-8";
+
+/*
+ * 패킷 메타데이터 요약 영역
+ * 남색 계열 글래스모피즘 디자인
+ */
+.packet-summary-panel {
+    position: relative;
+
+    margin: 28px 16px 34px;
+    padding: 28px 26px 30px;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(17, 31, 55, 0.82),
+            rgba(8, 18, 36, 0.74)
+        );
+
+    box-shadow:
+        0 20px 45px rgba(0, 0, 0, 0.24),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+/*
+ * 패널 뒤쪽의 은은한 푸른 광원
+ */
+.packet-summary-panel::before {
+    content: "";
+
+    position: absolute;
+
+    top: -130px;
+    right: -100px;
+
+    width: 330px;
+    height: 330px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(37, 99, 235, 0.13);
+
+    filter: blur(70px);
+
+    pointer-events: none;
+}
+
+/*
+ * 패널의 모든 실제 내용을 광원 위에 표시
+ */
+.packet-summary-panel > * {
+    position: relative;
+    z-index: 1;
+}
+
+/*
+ * 제목과 상태 메시지 배치
+ */
+.packet-summary-panel .panel-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+/*
+ * 패널 제목
+ */
+.packet-summary-panel .panel-header h2 {
+    margin: 0;
+
+    color: #f8fafc;
+
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+/*
+ * 제목 아래 설명
+ */
+.packet-summary-panel .panel-header > div > p {
+    margin: 8px 0 0;
+
+    color: #8fa9c9;
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/*
+ * 패킷 요약 조회 상태
+ */
+#packetSummaryStatus {
+    flex-shrink: 0;
+
+    margin: 0;
+    padding: 8px 14px;
+
+    border: 1px solid rgba(96, 165, 250, 0.24);
+    border-radius: 999px;
+
+    background:
+        rgba(37, 99, 235, 0.12);
+
+    color: #bfdbfe;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+
+    white-space: nowrap;
+}
+
+/*
+ * 패킷 요약 카드 배치
+ */
+.packet-summary-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
+    gap: 18px;
+
+    margin-top: 26px;
+}
+
+/*
+ * 공통 글래스 카드
+ */
+.packet-summary-card {
+    --packet-card-color: #60a5fa;
+    --packet-card-glow: rgba(96, 165, 250, 0.14);
+
+    position: relative;
+
+    min-width: 0;
+    min-height: 132px;
+
+    padding: 24px 22px;
+
+    overflow: hidden;
+
+    border:
+        1px solid rgba(148, 163, 184, 0.16);
+
+    border-radius: 17px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(30, 47, 75, 0.58),
+            rgba(15, 29, 51, 0.4)
+        );
+
+    box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.055);
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    transition:
+        transform 0.22s ease,
+        border-color 0.22s ease,
+        box-shadow 0.22s ease;
+}
+
+/*
+ * 카드 내부의 색상 광원
+ */
+.packet-summary-card::after {
+    content: "";
+
+    position: absolute;
+
+    right: -45px;
+    bottom: -60px;
+
+    width: 145px;
+    height: 145px;
+
+    border-radius: 50%;
+
+    background:
+        var(--packet-card-glow);
+
+    filter: blur(36px);
+
+    pointer-events: none;
+}
+
+/*
+ * 카드 위쪽 강조선
+ */
+.packet-summary-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 18px;
+    right: 18px;
+
+    height: 3px;
+
+    border-radius: 0 0 8px 8px;
+
+    background:
+        var(--packet-card-color);
+
+    box-shadow:
+        0 0 14px var(--packet-card-glow);
+}
+
+/*
+ * 카드에 마우스를 올렸을 때
+ */
+.packet-summary-card:hover {
+    transform: translateY(-4px);
+
+    border-color:
+        rgba(148, 163, 184, 0.3);
+
+    box-shadow:
+        0 18px 34px rgba(0, 0, 0, 0.26),
+        0 0 22px var(--packet-card-glow),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/*
+ * 카드 제목
+ */
+.packet-summary-card span {
+    position: relative;
+    z-index: 1;
+
+    display: block;
+
+    color: #b6c5d8;
+
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+/*
+ * 카드 숫자
+ */
+.packet-summary-card strong {
+    position: relative;
+    z-index: 1;
+
+    display: block;
+
+    margin-top: 17px;
+
+    color:
+        var(--packet-card-color);
+
+    font-size: 34px;
+    font-weight: 800;
+    line-height: 1;
+
+    letter-spacing: -0.025em;
+    font-variant-numeric: tabular-nums;
+
+    text-shadow:
+        0 0 18px var(--packet-card-glow);
+}
+
+/*
+ * 전체 메타데이터
+ */
+.packet-summary-card.total-card {
+    --packet-card-color: #60a5fa;
+    --packet-card-glow: rgba(96, 165, 250, 0.22);
+}
+
+/*
+ * 외부 통신
+ */
+.packet-summary-card.external-card {
+    --packet-card-color: #fb7185;
+    --packet-card-glow: rgba(251, 113, 133, 0.2);
+}
+
+/*
+ * DNS 도메인
+ */
+.packet-summary-card.dns-card {
+    --packet-card-color: #34d399;
+    --packet-card-glow: rgba(52, 211, 153, 0.2);
+}
+
+/*
+ * HTTP Host
+ */
+.packet-summary-card.http-card {
+    --packet-card-color: #fbbf24;
+    --packet-card-glow: rgba(251, 191, 36, 0.19);
+}
+
+/*
+ * HTTPS TLS SNI
+ */
+.packet-summary-card.tls-card {
+    --packet-card-color: #a78bfa;
+    --packet-card-glow: rgba(167, 139, 250, 0.22);
+}
+
+/*
+ * 화면 너비가 1200px 이하일 때
+ */
+@media (max-width: 1200px) {
+    .packet-summary-grid {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+}
+
+/*
+ * 화면 너비가 768px 이하일 때
+ */
+@media (max-width: 768px) {
+    .packet-summary-panel {
+        margin: 22px 12px 28px;
+        padding: 22px 18px 24px;
+    }
+
+    .packet-summary-panel .panel-header {
+        flex-direction: column;
+        align-items: stretch;
+
+        gap: 14px;
+    }
+
+    #packetSummaryStatus {
+        align-self: flex-start;
+
+        white-space: normal;
+    }
+
+    .packet-summary-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 15px;
+        margin-top: 22px;
+    }
+
+    .packet-summary-card {
+        min-height: 120px;
+        padding: 22px 18px;
+    }
+}
+
+/*
+ * 화면 너비가 480px 이하일 때
+ */
+@media (max-width: 480px) {
+    .packet-summary-panel {
+        margin-right: 8px;
+        margin-left: 8px;
+
+        padding: 20px 14px 22px;
+    }
+
+    .packet-summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .packet-summary-card {
+        min-height: 110px;
+    }
+}
+
+/*
+ * 패킷 통신 상세 패널
+ */
+.packet-detail-panel {
+    position: relative;
+
+    margin: 28px 16px 34px;
+    padding: 28px 26px 30px;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(17, 31, 55, 0.84),
+            rgba(8, 18, 36, 0.76)
+        );
+
+    box-shadow:
+        0 20px 45px rgba(0, 0, 0, 0.24),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+/*
+ * 패킷 상세 패널 제목 영역
+ */
+.packet-detail-panel .panel-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+.packet-detail-panel .panel-header h2 {
+    margin: 0;
+
+    color: #f8fafc;
+
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.packet-detail-panel .panel-header p {
+    margin: 8px 0 0;
+
+    color: #8fa9c9;
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/*
+ * 패킷 상세 조회 상태
+ */
+#packetDetailStatus {
+    flex-shrink: 0;
+
+    padding: 8px 14px;
+
+    border: 1px solid rgba(96, 165, 250, 0.26);
+    border-radius: 999px;
+
+    background: rgba(37, 99, 235, 0.13);
+
+    color: #bfdbfe;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+/*
+ * 패킷 필터 버튼 영역
+ */
+.packet-filter-area {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-top: 22px;
+    margin-bottom: 16px;
+}
+
+/*
+ * 글래스모피즘 필터 버튼
+ */
+.packet-filter-button {
+    appearance: none;
+
+    min-width: 72px;
+
+    padding: 9px 17px;
+
+    border: 1px solid rgba(148, 163, 184, 0.24);
+    border-radius: 999px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(51, 65, 85, 0.46),
+            rgba(15, 23, 42, 0.28)
+        );
+
+    color: #cbd5e1;
+
+    box-shadow:
+        0 7px 18px rgba(0, 0, 0, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    transition:
+        color 0.2s ease,
+        border-color 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.packet-filter-button:hover {
+    transform: translateY(-2px);
+
+    border-color: rgba(96, 165, 250, 0.55);
+
+    color: #ffffff;
+
+    box-shadow:
+        0 10px 24px rgba(0, 0, 0, 0.25),
+        0 0 16px rgba(59, 130, 246, 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+/*
+ * 현재 선택된 필터 버튼
+ */
+.packet-filter-button.active {
+    border-color: rgba(56, 189, 248, 0.7);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(37, 99, 235, 0.52),
+            rgba(14, 116, 144, 0.3)
+        );
+
+    color: #ffffff;
+
+    box-shadow:
+        0 8px 22px rgba(0, 0, 0, 0.23),
+        0 0 19px rgba(56, 189, 248, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+
+/*
+ * 패킷 상세 표 스크롤 영역
+ *
+ * 세로: 데이터가 많을 때 스크롤
+ * 가로: 화면이 좁을 때 스크롤
+ */
+.packet-table-wrapper {
+    width: 100%;
+    max-height: 480px;
+
+    overflow-x: auto;
+    overflow-y: auto;
+
+    border: 1px solid rgba(148, 163, 184, 0.17);
+    border-radius: 15px;
+
+    background: rgba(8, 18, 36, 0.34);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.035);
+
+    scrollbar-width: thin;
+    scrollbar-color:
+        rgba(125, 153, 190, 0.72)
+        rgba(15, 29, 51, 0.65);
+}
+
+/*
+ * Chrome과 Edge 스크롤바
+ */
+.packet-table-wrapper::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.packet-table-wrapper::-webkit-scrollbar-track {
+    border-radius: 10px;
+
+    background: rgba(15, 29, 51, 0.65);
+}
+
+.packet-table-wrapper::-webkit-scrollbar-thumb {
+    border: 2px solid rgba(15, 29, 51, 0.65);
+    border-radius: 10px;
+
+    background: rgba(125, 153, 190, 0.72);
+}
+
+.packet-table-wrapper::-webkit-scrollbar-thumb:hover {
+    background: rgba(147, 178, 218, 0.9);
+}
+
+/*
+ * 패킷 상세 표
+ */
+.packet-detail-table {
+    width: 100%;
+    min-width: 1050px;
+
+    border-collapse: separate;
+    border-spacing: 0;
+
+    color: #dbeafe;
+
+    font-size: 13px;
+}
+
+/*
+ * 표 제목은 세로 스크롤 중에도 고정합니다.
+ */
+.packet-detail-table thead th {
+    position: sticky;
+
+    top: 0;
+    z-index: 2;
+
+    padding: 15px 16px;
+
+    border-bottom:
+        1px solid rgba(148, 163, 184, 0.23);
+
+    background: rgba(24, 43, 72, 0.96);
+
+    color: #bfdbfe;
+
+    font-size: 13px;
+    font-weight: 700;
+    text-align: left;
+
+    white-space: nowrap;
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+/*
+ * 표 데이터
+ */
+.packet-detail-table tbody td {
+    padding: 14px 16px;
+
+    border-bottom:
+        1px solid rgba(148, 163, 184, 0.15);
+
+    color: #d5e2f3;
+
+    white-space: nowrap;
+}
+
+.packet-detail-table tbody tr {
+    transition:
+        background-color 0.18s ease;
+}
+
+.packet-detail-table tbody tr:hover {
+    background: rgba(59, 130, 246, 0.08);
+}
+
+.packet-detail-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+/*
+ * 데이터가 없을 때 안내 행
+ */
+.packet-detail-table .packet-empty-row td {
+    padding: 36px 20px;
+
+    color: #8fa9c9;
+
+    text-align: center;
+}
+
+/*
+ * 태블릿 화면
+ */
+@media (max-width: 768px) {
+    .packet-detail-panel {
+        margin: 22px 12px 28px;
+        padding: 22px 18px 24px;
+    }
+
+    .packet-detail-panel .panel-header {
+        flex-direction: column;
+        align-items: stretch;
+
+        gap: 14px;
+    }
+
+    #packetDetailStatus {
+        align-self: flex-start;
+
+        white-space: normal;
+    }
+
+    .packet-table-wrapper {
+        max-height: 420px;
+    }
+}
+
+/*
+ * 모바일 화면
+ */
+@media (max-width: 480px) {
+    .packet-detail-panel {
+        margin-right: 8px;
+        margin-left: 8px;
+
+        padding: 20px 14px 22px;
+    }
+
+    .packet-filter-area {
+        gap: 8px;
+    }
+
+    .packet-filter-button {
+        min-width: 64px;
+
+        padding: 8px 13px;
+    }
+
+    .packet-table-wrapper {
+        max-height: 380px;
+    }
+}
+
+/*
+ * 패킷 필터와 검색창을
+ * 한 줄에 배치합니다.
+ */
+.packet-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 18px;
+
+    margin-top: 22px;
+    margin-bottom: 16px;
+}
+
+/*
+ * 기존 필터 영역의 여백을
+ * 툴바가 관리하도록 변경합니다.
+ */
+.packet-toolbar .packet-filter-area {
+    flex-shrink: 0;
+
+    margin: 0;
+}
+
+/*
+ * 패킷 검색 영역
+ */
+.packet-search-area {
+    display: flex;
+    align-items: center;
+
+    min-width: 0;
+
+    gap: 10px;
+
+    margin-left: auto;
+}
+
+/*
+ * 글래스모피즘 검색창
+ */
+.packet-search-input {
+    width: 320px;
+    min-width: 0;
+
+    padding: 11px 15px;
+
+    border: 1px solid rgba(148, 163, 184, 0.24);
+    border-radius: 12px;
+
+    outline: none;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(30, 47, 75, 0.46),
+            rgba(8, 18, 36, 0.3)
+        );
+
+    color: #f8fafc;
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+    font-family: inherit;
+    font-size: 13px;
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+/*
+ * 검색창 안내 문구
+ */
+.packet-search-input::placeholder {
+    color: #7890ae;
+
+    opacity: 1;
+}
+
+/*
+ * 검색창을 선택했을 때
+ */
+.packet-search-input:focus {
+    border-color: rgba(56, 189, 248, 0.7);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(30, 64, 105, 0.52),
+            rgba(8, 25, 48, 0.36)
+        );
+
+    box-shadow:
+        0 9px 24px rgba(0, 0, 0, 0.22),
+        0 0 0 3px rgba(56, 189, 248, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.09);
+}
+
+/*
+ * 검색 입력창의 기본 삭제 아이콘
+ */
+.packet-search-input::-webkit-search-cancel-button {
+    cursor: pointer;
+
+    filter: invert(1);
+
+    opacity: 0.7;
+}
+
+/*
+ * 검색 초기화 버튼
+ */
+.packet-search-clear-button {
+    flex-shrink: 0;
+
+    padding: 10px 16px;
+
+    border: 1px solid rgba(148, 163, 184, 0.24);
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(51, 65, 85, 0.46),
+            rgba(15, 23, 42, 0.3)
+        );
+
+    color: #cbd5e1;
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    transition:
+        color 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.packet-search-clear-button:hover {
+    transform: translateY(-2px);
+
+    border-color: rgba(96, 165, 250, 0.58);
+
+    color: #ffffff;
+
+    box-shadow:
+        0 10px 24px rgba(0, 0, 0, 0.24),
+        0 0 16px rgba(59, 130, 246, 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.11);
+}
+
+/*
+ * 태블릿과 작은 화면에서는
+ * 필터와 검색창을 두 줄로 배치합니다.
+ */
+@media (max-width: 900px) {
+    .packet-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .packet-search-area {
+        width: 100%;
+
+        margin-left: 0;
+    }
+
+    .packet-search-input {
+        flex: 1;
+
+        width: 100%;
+    }
+}
+
+/*
+ * 모바일 화면
+ */
+@media (max-width: 480px) {
+    .packet-search-area {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .packet-search-clear-button {
+        width: 100%;
+    }
+}

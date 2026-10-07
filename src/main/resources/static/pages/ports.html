@@ -1,0 +1,99 @@
+<!-- 포트 통계 -->
+<section class="summary-grid">
+
+    <article class="summary-card">
+        <span>전체 열린 포트</span>
+        <strong id="totalPortCount">0</strong>
+    </article>
+
+    <article class="summary-card tcp-card">
+        <span>TCP</span>
+        <strong id="tcpPortCount">0</strong>
+    </article>
+
+    <article class="summary-card udp-card">
+        <span>UDP</span>
+        <strong id="udpPortCount">0</strong>
+    </article>
+
+    <article class="summary-card warning-card">
+        <span>주의·위험 포트</span>
+        <strong id="warningPortCount">0</strong>
+    </article>
+
+</section>
+
+
+<!-- 현재 열린 포트 -->
+<section class="panel port-panel">
+
+    <div class="panel-header">
+
+        <div>
+            <h2>현재 열린 포트</h2>
+        </div>
+
+        <div class="filter-area">
+
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="포트, 서비스, 프로세스, 위험도 검색">
+
+            <select id="protocolFilter">
+
+                <option value="ALL">
+                    전체 프로토콜
+                </option>
+
+                <option value="TCP">
+                    TCP
+                </option>
+
+                <option value="UDP">
+                    UDP
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>프로토콜</th>
+                    <th>서비스</th>
+                    <th>로컬 주소</th>
+                    <th>포트</th>
+                    <th>상태</th>
+                    <th>PID</th>
+                    <th>프로세스</th>
+                    <th>위험도</th>
+                    <th>판정 이유</th>
+                    <th>수집 시각</th>
+                </tr>
+            </thead>
+
+            <tbody id="portTableBody">
+
+                <tr>
+                    <td
+                        colspan="10"
+                        class="empty-message">
+                        데이터를 불러오는 중입니다.
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>

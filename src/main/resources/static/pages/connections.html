@@ -1,0 +1,26 @@
+<section class="connection-workspace">
+
+    <div class="connection-workspace-header">
+        <div>
+            <h2>연결 분석</h2>
+            <p>현재 연결, 종료 이력, 의심 연결, 시간대별 통계와 관계 그래프를 화면별로 확인합니다.</p>
+        </div>
+    </div>
+
+    <nav class="connection-subnav" aria-label="연결 분석 세부 메뉴">
+        <button type="button" class="connection-subnav-button active" data-connection-view="current">현재 연결</button>
+        <button type="button" class="connection-subnav-button" data-connection-view="history">종료 이력</button>
+        <button type="button" class="connection-subnav-button" data-connection-view="suspicious">의심 연결</button>
+        <button type="button" class="connection-subnav-button" data-connection-view="hourly">시간대별</button>
+        <button type="button" class="connection-subnav-button" data-connection-view="relation">연결 관계</button>
+        <button type="button" class="connection-subnav-button" data-connection-view="selection">선택 분석</button>
+    </nav>
+
+    <div id="connectionViewCurrent" class="connection-view" data-connection-view-panel="current"></div>
+    <div id="connectionViewHistory" class="connection-view" data-connection-view-panel="history" hidden></div>
+    <div id="connectionViewSuspicious" class="connection-view" data-connection-view-panel="suspicious" hidden></div>
+    <div id="connectionViewHourly" class="connection-view" data-connection-view-panel="hourly" hidden></div>
+    <div id="connectionViewRelation" class="connection-view" data-connection-view-panel="relation" hidden></div>
+    <div id="connectionViewSelection" class="connection-view" data-connection-view-panel="selection" hidden></div>
+
+</section>

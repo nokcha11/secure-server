@@ -1,0 +1,323 @@
+/* ADMIN 전용 OpenSSH 원격 진단 화면 */
+
+.remote-diagnostic-panel[hidden] {
+    display: none;
+}
+
+.remote-diagnostic-panel {
+    margin-top: 22px;
+    padding: 24px;
+}
+
+.remote-diagnostic-admin-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 92px;
+    padding: 7px 11px;
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    border-radius: 999px;
+    background: rgba(56, 189, 248, 0.12);
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.remote-diagnostic-form {
+    display: grid;
+    grid-template-columns:
+        minmax(220px, 1.4fr)
+        minmax(110px, 0.45fr)
+        minmax(180px, 1fr)
+        minmax(230px, 1.2fr);
+    gap: 16px;
+}
+
+.remote-diagnostic-field {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.remote-diagnostic-field label {
+    color: #cbd5e1;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.remote-diagnostic-field input,
+.remote-diagnostic-field select {
+    width: 100%;
+    min-width: 0;
+}
+
+.remote-diagnostic-actions {
+    display: flex;
+    justify-content: flex-end;
+    grid-column: 1 / -1;
+}
+
+.remote-diagnostic-submit-button {
+    min-width: 132px;
+    padding: 11px 20px;
+    border: 0;
+    border-radius: 10px;
+    background: var(--primary);
+    color: #03111d;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.remote-diagnostic-submit-button:hover {
+    background: #7dd3fc;
+}
+
+.remote-diagnostic-submit-button:disabled {
+    cursor: wait;
+    opacity: 0.65;
+}
+
+.remote-diagnostic-status {
+    min-height: 22px;
+    margin: 16px 0 0;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.remote-diagnostic-status.is-waiting {
+    color: var(--primary);
+}
+
+.remote-diagnostic-status.is-success {
+    color: var(--success);
+}
+
+.remote-diagnostic-status.is-error {
+    color: var(--danger);
+}
+
+/* 결과는 원문 + 핵심 요약 2열 */
+.remote-diagnostic-result-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.75fr) minmax(280px, 0.75fr);
+    gap: 14px;
+    margin-top: 14px;
+    align-items: stretch;
+}
+
+.remote-diagnostic-result,
+.remote-diagnostic-summary {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    background: #0d1628;
+}
+
+.remote-diagnostic-result {
+    margin-top: 0;
+}
+
+.remote-diagnostic-result-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 13px 16px;
+    border-bottom: 1px solid var(--border);
+}
+
+.remote-diagnostic-result-header h3,
+.remote-diagnostic-summary-header h3 {
+    margin: 0;
+    color: var(--text);
+    font-size: 15px;
+}
+
+.remote-diagnostic-result-header span {
+    overflow: hidden;
+    color: var(--muted);
+    font-size: 12px;
+    text-align: right;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.remote-diagnostic-output {
+    min-height: 340px;
+    max-height: 500px;
+    margin: 0;
+    padding: 18px;
+    overflow: auto;
+    color: #dbeafe;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.65;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+}
+
+.remote-diagnostic-summary {
+    position: relative;
+    padding: 16px;
+    background:
+        radial-gradient(
+            circle at 100% 0%,
+            rgba(34, 211, 238, 0.08),
+            transparent 42%
+        ),
+        #0d1628;
+}
+
+.remote-diagnostic-summary-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-bottom: 13px;
+    border-bottom: 1px solid rgba(38, 53, 82, 0.82);
+}
+
+.remote-diagnostic-summary-header > div > span {
+    display: block;
+    margin-bottom: 5px;
+    color: #52708e;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 0.11em;
+}
+
+.remote-diagnostic-summary-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 52px;
+    min-height: 28px;
+    padding: 0 9px;
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    border-radius: 999px;
+    background: rgba(148, 163, 184, 0.07);
+    color: #94a3b8;
+    font-size: 10px;
+    font-weight: 900;
+}
+
+.remote-diagnostic-summary-status.is-running {
+    border-color: rgba(56, 189, 248, 0.24);
+    background: rgba(56, 189, 248, 0.08);
+    color: #7dd3fc;
+}
+
+.remote-diagnostic-summary-status.is-success {
+    border-color: rgba(52, 211, 153, 0.24);
+    background: rgba(52, 211, 153, 0.08);
+    color: #6ee7b7;
+}
+
+.remote-diagnostic-summary-status.is-error {
+    border-color: rgba(244, 63, 94, 0.25);
+    background: rgba(244, 63, 94, 0.08);
+    color: #fda4af;
+}
+
+.remote-diagnostic-summary-cards {
+    display: grid;
+    gap: 10px;
+    margin-top: 13px;
+}
+
+.remote-summary-card {
+    min-width: 0;
+    padding: 12px 13px;
+    border: 1px solid rgba(38, 53, 82, 0.82);
+    border-radius: 11px;
+    background: rgba(23, 35, 59, 0.54);
+}
+
+.remote-summary-card span,
+.remote-summary-card strong {
+    display: block;
+}
+
+.remote-summary-card span {
+    margin-bottom: 6px;
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.remote-summary-card strong {
+    color: #dbeafe;
+    font-size: 12px;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+}
+
+.remote-summary-card.emphasis strong {
+    color: #67e8f9;
+    font-size: 16px;
+}
+
+.remote-summary-empty {
+    padding: 22px 12px;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.7;
+    text-align: center;
+}
+
+@media (max-width: 1180px) {
+    .remote-diagnostic-result-layout {
+        grid-template-columns: minmax(0, 1.45fr) minmax(240px, 0.75fr);
+    }
+}
+
+@media (max-width: 1100px) {
+    .remote-diagnostic-form {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .remote-diagnostic-result-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .remote-diagnostic-output {
+        min-height: 260px;
+    }
+
+    .remote-diagnostic-summary-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    .remote-diagnostic-panel {
+        padding: 18px;
+    }
+
+    .remote-diagnostic-panel .panel-header,
+    .remote-diagnostic-result-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .remote-diagnostic-form,
+    .remote-diagnostic-summary-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .remote-diagnostic-actions {
+        grid-column: auto;
+    }
+
+    .remote-diagnostic-submit-button {
+        width: 100%;
+    }
+
+    .remote-diagnostic-result-header span {
+        text-align: left;
+        white-space: normal;
+    }
+}

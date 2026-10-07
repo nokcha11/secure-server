@@ -1,0 +1,73 @@
+<section class="network-section network-selection-analysis-section">
+
+    <div class="section-header network-selection-section-header">
+        <div>
+            <h2>선택 항목 분석</h2>
+            <p>현재 연결과 종료 이력 등에서 선택한 항목을 한 번에 비교합니다.</p>
+        </div>
+
+        <button
+            id="clearSelectedNetworkButton"
+            class="network-selection-clear-button"
+            type="button"
+            disabled>
+            선택 전체 해제
+        </button>
+    </div>
+
+    <div id="networkSelectionEmpty" class="network-analysis-empty">
+        <strong>현재 연결</strong> 또는 <strong>종료 이력</strong>에서 항목을 체크한 뒤
+        오른쪽 플로팅 메뉴의 <strong>선택 항목 분석</strong>을 눌러주세요.
+    </div>
+
+    <div id="networkSelectionAnalysisResult" class="network-analysis-result" hidden>
+
+        <div class="network-analysis-summary-grid">
+            <article class="network-analysis-summary-card">
+                <span>선택 항목</span>
+                <strong id="networkAnalysisSelectedCount">0</strong>
+            </article>
+
+            <article class="network-analysis-summary-card">
+                <span>현재 연결</span>
+                <strong id="networkAnalysisCurrentCount">0</strong>
+            </article>
+
+            <article class="network-analysis-summary-card">
+                <span>종료 이력</span>
+                <strong id="networkAnalysisHistoryCount">0</strong>
+            </article>
+
+            <article class="network-analysis-summary-card">
+                <span>의심 연결</span>
+                <strong id="networkAnalysisSuspiciousCount" class="network-analysis-danger-value">0</strong>
+            </article>
+
+            <article class="network-analysis-summary-card">
+                <span>외부 연결</span>
+                <strong id="networkAnalysisExternalCount">0</strong>
+            </article>
+
+            <article class="network-analysis-summary-card">
+                <span>상대방 IP</span>
+                <strong id="networkAnalysisRemoteIpCount">0</strong>
+            </article>
+        </div>
+
+        <div class="network-analysis-verdict-box">
+            <div>
+                <span class="network-analysis-verdict-label">분석 판정</span>
+                <strong id="networkAnalysisVerdict" class="network-analysis-verdict">-</strong>
+            </div>
+
+            <p id="networkAnalysisSummaryText">선택한 연결의 분석 결과가 여기에 표시됩니다.</p>
+        </div>
+
+        <div class="network-analysis-list-section">
+            <h3>선택 항목 상세</h3>
+            <div id="networkAnalysisItemList" class="network-analysis-item-list"></div>
+        </div>
+
+    </div>
+
+</section>

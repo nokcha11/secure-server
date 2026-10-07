@@ -1,0 +1,25 @@
+<section class="network-section relation-graph-section">
+
+    <div class="section-header">
+        <div>
+            <h2>네트워크 연결 관계</h2>
+            <p>이 PC와 통신한 상대방 IP의 관계를 표시합니다.</p>
+        </div>
+
+        <div class="relation-graph-summary">
+            <span>연결된 상대방 IP</span>
+            <strong id="relationNodeCount">0개</strong>
+        </div>
+    </div>
+
+    <div id="relationGraphStatus" class="chart-status">네트워크 연결 관계를 불러오는 중입니다.</div>
+
+    <div class="relation-graph-wrapper">
+        <svg id="relationGraphSvg" class="relation-graph-svg" viewBox="0 0 1000 560" role="img" aria-label="내 PC와 상대방 IP의 네트워크 연결 관계 그래프"></svg>
+
+        <div id="relationGraphEmpty" class="relation-graph-empty">표시할 네트워크 연결 관계가 없습니다.</div>
+    </div>
+
+    <div id="relationGraphDetails" class="relation-graph-details">IP 노드를 클릭하면 연결 상세 정보가 표시됩니다.</div>
+
+</section>

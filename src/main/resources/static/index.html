@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+
+<head>
+
+	<meta charset="UTF-8">
+
+	<meta
+
+		name="viewport"
+
+		content="width=device-width, initial-scale=1.0">
+
+	<title>SecureAgent 보안 대시보드</title>
+
+	<link rel="icon" href="data:,">
+
+	<link rel="stylesheet" href="/css/dashboard-base.css?v=1">
+
+	<link rel="stylesheet" href="/css/dashboard-layout.css?v=3">
+
+	<link rel="stylesheet" href="/css/dashboard-shell.css?v=4">
+
+	<link rel="stylesheet" href="/css/dashboard-table.css?v=1">
+
+	<link rel="stylesheet" href="/css/dashboard-network.css?v=3">
+
+	<link rel="stylesheet" href="/css/dashboard-chart.css?v=2">
+
+	<link rel="stylesheet" href="/css/dashboard-packet.css?v=1">
+
+	<link rel="stylesheet" href="/css/dashboard-packet-chart.css?v=1">
+
+	<link rel="stylesheet" href="/css/dashboard-remote-diagnostic.css?v=1">
+
+</head>
+
+<body>
+
+	<!-- ========================================
+
+	     상단 헤더
+
+	     ======================================== -->
+
+	<header class="top-header">
+
+		<div>
+
+			<h1>SecureAgent</h1>
+
+			<p>
+
+				PC 보안 상태 및 네트워크 연결 모니터링
+
+			</p>
+
+		</div>
+
+
+
+		<!-- ========================================
+
+		     로그인 계정 메뉴
+
+		     ======================================== -->
+
+		<div class="account-actions">
+
+			<div class="account-menu-wrapper">
+
+				<button
+
+					id="currentAccountToggle"
+
+					class="current-account-info current-account-toggle"
+
+					type="button"
+
+					aria-haspopup="true"
+
+					aria-expanded="false"
+
+					aria-controls="currentAccountDropdown">
+
+					<span
+
+						class="current-account-dot"
+
+						aria-hidden="true">
+
+					</span>
+
+
+
+					<span class="current-account-text">
+
+						<span
+
+							id="currentAccountStatus"
+
+							class="current-account-status">
+
+							계정 확인 중
+
+						</span>
+
+
+
+						<strong class="current-account-summary">
+
+							<span id="currentAccountRole">
+
+								-
+
+							</span>
+
+							<span class="current-account-divider">
+
+								·
+
+							</span>
+
+							<span id="currentAccountUsername">
+
+								-
+
+							</span>
+
+						</strong>
+
+					</span>
+
+
+
+					<span
+
+						class="account-menu-chevron"
+
+						aria-hidden="true">
+
+						▾
+
+					</span>
+
+				</button>
+
+
+
+
+
+				<!-- 계정 드롭다운 -->
+
+				<div
+
+					id="currentAccountDropdown"
+
+					class="account-dropdown"
+
+					hidden>
+
+
+
+					<div class="account-dropdown-header">
+
+						<span class="account-dropdown-label">
+
+							현재 로그인 계정
+
+						</span>
+
+						<strong class="account-dropdown-user">
+
+							<span id="currentAccountDropdownRole">
+
+								-
+
+							</span>
+
+							<span>
+
+								·
+
+							</span>
+
+							<span id="currentAccountDropdownUsername">
+
+								-
+
+							</span>
+
+						</strong>
+
+					</div>
+
+
+
+
+
+					<div class="account-dropdown-divider"></div>
+
+
+
+					<button
+
+						id="accountMenuMyAccountButton"
+
+						class="account-dropdown-item"
+
+						type="button">
+
+						내 계정
+
+					</button>
+
+
+
+					<button
+
+						id="passwordChangeOpenButton"
+
+						class="account-dropdown-item"
+
+						type="button">
+
+						비밀번호 변경
+
+					</button>
+
+
+
+					<button
+
+						id="accountMenuUserManagementButton"
+
+						class="account-dropdown-item admin-only-action"
+
+						type="button"
+
+						hidden>
+
+						사용자 관리
+
+					</button>
+
+
+
+					<div class="account-dropdown-divider"></div>
+
+
+
+					<button
+
+						id="logoutButton"
+
+						class="account-dropdown-item account-dropdown-logout"
+
+						type="button">
+
+						로그아웃
+
+					</button>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</header>
+
+
+
+
+
+	<!-- ========================================
+
+	     본인 비밀번호 변경 창
+
+	     ======================================== -->
+
+	<div
+
+		id="passwordChangeModal"
+
+		class="password-change-modal"
+
+		hidden>
+
+		<section
+
+			class="password-change-dialog"
+
+			role="dialog"
+
+			aria-modal="true"
+
+			aria-labelledby="passwordChangeTitle">
+
+			<div class="password-change-header">
+
+				<div>
+
+					<h2 id="passwordChangeTitle">
+
+						비밀번호 변경
+
+					</h2>
+
+					<p>
+
+						현재 로그인한 계정의 비밀번호를 변경합니다.
+
+					</p>
+
+				</div>
+
+
+
+				<button
+
+					id="passwordChangeCloseButton"
+
+					class="password-change-close-button"
+
+					type="button"
+
+					aria-label="비밀번호 변경 창 닫기">
+
+					×
+
+				</button>
+
+			</div>
+
+
+
+			<form
+
+				id="passwordChangeForm"
+
+				class="password-change-form"
+
+				autocomplete="off">
+
+				<label for="currentPassword">
+
+					현재 비밀번호
+
+				</label>
+
+
+
+				<input
+
+					id="currentPassword"
+
+					name="currentPassword"
+
+					type="password"
+
+					autocomplete="current-password"
+
+					required>
+
+
+
+				<label for="newPassword">
+
+					새 비밀번호
+
+				</label>
+
+
+
+				<input
+
+					id="newPassword"
+
+					name="newPassword"
+
+					type="password"
+
+					autocomplete="new-password"
+
+					minlength="12"
+
+					required>
+
+
+
+				<p class="password-change-guide">
+
+					새 비밀번호는 12자 이상 입력하세요.
+
+				</p>
+
+
+
+				<label for="confirmPassword">
+
+					새 비밀번호 확인
+
+				</label>
+
+
+
+				<input
+
+					id="confirmPassword"
+
+					name="confirmPassword"
+
+					type="password"
+
+					autocomplete="new-password"
+
+					minlength="12"
+
+					required>
+
+
+
+				<p
+
+					id="passwordChangeStatus"
+
+					class="password-change-status"
+
+					role="status"
+
+					aria-live="polite">
+
+				</p>
+
+
+
+				<div class="password-change-actions">
+
+					<button
+
+						id="passwordChangeCancelButton"
+
+						class="password-change-cancel-button"
+
+						type="button">
+
+						취소
+
+					</button>
+
+
+
+					<button
+
+						id="passwordChangeSubmitButton"
+
+						class="password-change-submit-button"
+
+						type="submit">
+
+						비밀번호 변경
+
+					</button>
+
+				</div>
+
+			</form>
+
+		</section>
+
+	</div>
+
+
+
+
+
+	<!-- ========================================
+
+	     ADMIN 사용자 비밀번호 초기화 창
+
+	     ======================================== -->
+
+	<div
+
+		id="adminPasswordResetModal"
+
+		class="password-change-modal"
+
+		hidden>
+
+		<section
+
+			class="password-change-dialog"
+
+			role="dialog"
+
+			aria-modal="true"
+
+			aria-labelledby="adminPasswordResetTitle">
+
+			<div class="password-change-header">
+
+				<div>
+
+					<h2 id="adminPasswordResetTitle">
+
+						사용자 비밀번호 초기화
+
+					</h2>
+
+					<p>
+
+						VIEWER 사용자의 비밀번호를 새로 설정합니다.
+
+					</p>
+
+				</div>
+
+
+
+				<button
+
+					id="adminPasswordResetCloseButton"
+
+					class="password-change-close-button"
+
+					type="button"
+
+					aria-label="사용자 비밀번호 초기화 창 닫기">
+
+					×
+
+				</button>
+
+			</div>
+
+
+
+			<form
+
+				id="adminPasswordResetForm"
+
+				class="password-change-form"
+
+				autocomplete="off">
+
+				<label for="resetTargetUsername">
+
+					사용자 아이디
+
+				</label>
+
+
+
+				<input
+
+					id="resetTargetUsername"
+
+					name="targetUsername"
+
+					type="text"
+
+					value="user"
+
+					required>
+
+
+
+				<label for="resetNewPassword">
+
+					새 비밀번호
+
+				</label>
+
+
+
+				<input
+
+					id="resetNewPassword"
+
+					name="newPassword"
+
+					type="password"
+
+					minlength="12"
+
+					autocomplete="new-password"
+
+					required>
+
+
+
+				<p class="password-change-guide">
+
+					새 비밀번호는 12자 이상 입력하세요.
+
+				</p>
+
+
+
+				<label for="resetConfirmPassword">
+
+					새 비밀번호 확인
+
+				</label>
+
+
+
+				<input
+
+					id="resetConfirmPassword"
+
+					name="confirmPassword"
+
+					type="password"
+
+					minlength="12"
+
+					autocomplete="new-password"
+
+					required>
+
+
+
+				<p
+
+					id="adminPasswordResetStatus"
+
+					class="password-change-status"
+
+					role="status"
+
+					aria-live="polite">
+
+				</p>
+
+
+
+				<div class="password-change-actions">
+
+					<button
+
+						id="adminPasswordResetCancelButton"
+
+						class="password-change-cancel-button"
+
+						type="button">
+
+						취소
+
+					</button>
+
+
+
+					<button
+
+						id="adminPasswordResetSubmitButton"
+
+						class="password-change-submit-button"
+
+						type="submit">
+
+						비밀번호 초기화
+
+					</button>
+
+				</div>
+
+			</form>
+
+		</section>
+
+	</div>
+
+
+
+
+
+	<!-- ========================================
+
+	     ADMIN 사용자 계정 잠금 해제 창
+
+	     ======================================== -->
+
+	<div
+
+		id="adminAccountUnlockModal"
+
+		class="password-change-modal"
+
+		hidden>
+
+		<section
+
+			class="password-change-dialog"
+
+			role="dialog"
+
+			aria-modal="true"
+
+			aria-labelledby="adminAccountUnlockTitle">
+
+			<div class="password-change-header">
+
+				<div>
+
+					<h2 id="adminAccountUnlockTitle">
+
+						사용자 계정 잠금 해제
+
+					</h2>
+
+					<p>
+
+						로그인 실패로 잠긴 사용자 계정을 해제합니다.
+
+					</p>
+
+				</div>
+
+
+
+				<button
+
+					id="adminAccountUnlockCloseButton"
+
+					class="password-change-close-button"
+
+					type="button"
+
+					aria-label="사용자 계정 잠금 해제 창 닫기">
+
+					×
+
+				</button>
+
+			</div>
+
+
+
+			<form
+
+				id="adminAccountUnlockForm"
+
+				class="password-change-form"
+
+				autocomplete="off">
+
+				<label for="unlockTargetUsername">
+
+					사용자 아이디
+
+				</label>
+
+
+
+				<input
+
+					id="unlockTargetUsername"
+
+					name="targetUsername"
+
+					type="text"
+
+					value="user"
+
+					required>
+
+
+
+				<p
+
+					id="adminAccountUnlockStatus"
+
+					class="password-change-status"
+
+					role="status"
+
+					aria-live="polite">
+
+				</p>
+
+
+
+				<div class="password-change-actions">
+
+					<button
+
+						id="adminAccountUnlockCancelButton"
+
+						class="password-change-cancel-button"
+
+						type="button">
+
+						취소
+
+					</button>
+
+
+
+					<button
+
+						id="adminAccountUnlockSubmitButton"
+
+						class="password-change-submit-button"
+
+						type="submit">
+
+						계정 잠금 해제
+
+					</button>
+
+				</div>
+
+			</form>
+
+		</section>
+
+	</div>
+
+
+
+
+
+	<!-- ========================================
+
+	     전체 화면
+
+	     ======================================== -->
+
+	<div class="app-layout">
+
+
+
+		<!-- ========================================
+
+		     왼쪽 사이드바
+
+		     ======================================== -->
+
+		<aside class="sidebar">
+
+			<div class="sidebar-header">
+
+				<span class="sidebar-brand">
+
+					SecureAgent
+
+				</span>
+
+				<span class="sidebar-subtitle">
+
+					Security Console
+
+				</span>
+
+			</div>
+
+
+
+			<nav class="sidebar-nav">
+
+
+
+				<!-- 보안 현황 -->
+
+				<div class="sidebar-group">
+
+					<p class="sidebar-group-title">
+
+						보안 현황
+
+					</p>
+
+
+
+					<button
+
+						type="button"
+
+						class="sidebar-menu active"
+
+						data-page="overview">
+
+						<span class="sidebar-menu-icon">
+
+							⌂
+
+						</span>
+
+						<span>
+
+							통합 관제
+
+						</span>
+
+					</button>
+
+
+
+					<button
+
+						type="button"
+
+						class="sidebar-menu"
+
+						data-page="agent">
+
+						<span class="sidebar-menu-icon">
+
+							PC
+
+						</span>
+
+						<span>
+
+							에이전트 상태
+
+						</span>
+
+					</button>
+
+				</div>
+
+
+
+
+
+				<!-- 네트워크 분석 -->
+
+				<div class="sidebar-group">
+
+					<p class="sidebar-group-title">
+
+						네트워크 분석
+
+					</p>
+
+
+
+					<button
+
+						type="button"
+
+						class="sidebar-menu"
+
+						data-page="ports">
+
+						<span class="sidebar-menu-icon">
+
+							P
+
+						</span>
+
+						<span>
+
+							포트 분석
+
+						</span>
+
+					</button>
+
+
+
+					<button
+
+						type="button"
+
+						class="sidebar-menu"
+
+						data-page="connections">
+
+						<span class="sidebar-menu-icon">
+
+							N
+
+						</span>
+
+						<span>
+
+							연결 분석
+
+						</span>
+
+					</button>
+
+
+
+					<button
+
+						type="button"
+
+						class="sidebar-menu"
+
+						data-page="packets">
+
+						<span class="sidebar-menu-icon">
+
+							D
+
+						</span>
+
+						<span>
+
+							패킷 분석
+
+						</span>
+
+					</button>
+
+				</div>
+
+
+
+
+
+				<!-- ADMIN 전용 대응 및 진단 -->
+
+				<div
+
+					id="adminResponseGroup"
+
+					class="sidebar-group"
+
+					hidden>
+
+					<p class="sidebar-group-title">
+
+						대응 및 진단
+
+					</p>
+
+
+
+					<button
+
+						type="button"
+
+						class="sidebar-menu admin-only-menu"
+
+						data-page="remote-diagnostic"
+
+						hidden>
+
+						<span class="sidebar-menu-icon">
+
+							S
+
+						</span>
+
+						<span>
+
+							원격 진단
+
+						</span>
+
+					</button>
+
+
+
+					<button
+
+						type="button"
+
+						class="sidebar-menu admin-only-menu"
+
+						data-page="audit"
+
+						hidden>
+
+						<span class="sidebar-menu-icon">
+
+							A
+
+						</span>
+
+						<span>
+
+							감사 기록
+
+						</span>
+
+					</button>
+
+				</div>
+
+
+
+
+
+				<!-- 계정 관리 -->
+
+				<div class="sidebar-group">
+
+					<p class="sidebar-group-title">
+
+						계정 관리
+
+					</p>
+
+
+
+					<button
+
+						type="button"
+
+						class="sidebar-menu"
+
+						data-page="account">
+
+						<span class="sidebar-menu-icon">
+
+							M
+
+						</span>
+
+						<span>
+
+							내 계정
+
+						</span>
+
+					</button>
+
+
+
+					<button
+
+						type="button"
+
+						class="sidebar-menu admin-only-menu"
+
+						data-page="user-management"
+
+						hidden>
+
+						<span class="sidebar-menu-icon">
+
+							U
+
+						</span>
+
+						<span>
+
+							사용자 관리
+
+						</span>
+
+					</button>
+
+				</div>
+
+			</nav>
+
+		</aside>
+
+
+
+
+
+		<!-- ========================================
+
+		     오른쪽 화면 표시 영역
+
+		     ======================================== -->
+
+		<main
+
+			id="dashboardContent"
+
+			class="dashboard-container">
+
+			<section
+
+				class="panel dashboard-placeholder-panel">
+
+				<div class="panel-header">
+
+					<div>
+
+						<h2>
+
+							대시보드를 불러오는 중입니다.
+
+						</h2>
+
+						<p>
+
+							잠시만 기다려 주세요.
+
+						</p>
+
+					</div>
+
+				</div>
+
+			</section>
+
+		</main>
+
+	</div>
+
+
+
+
+
+	<script src="/js/dashboard-bootstrap.js?v=4"></script>
+
+</body>
+
+</html>

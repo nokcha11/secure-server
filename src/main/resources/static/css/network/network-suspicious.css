@@ -1,0 +1,58 @@
+.suspicious-section {
+    border-color: rgba(251, 113, 133, 0.45);
+}
+
+.suspicious-section.has-no-threat {
+    border-color: rgba(52, 211, 153, 0.38);
+}
+
+.suspicious-section.has-threat {
+    border-color: var(--danger);
+}
+
+.suspicious-count-area {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.suspicious-count-area span {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.suspicious-count-area strong {
+    color: var(--danger);
+    font-size: 26px;
+}
+
+.security-status-message {
+    margin-bottom: 16px;
+    padding: 13px 15px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    background: rgba(143, 160, 184, 0.08);
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.security-status-message.status-safe {
+    border-color: rgba(52, 211, 153, 0.3);
+    background: rgba(52, 211, 153, 0.08);
+    color: var(--success);
+}
+
+.security-status-message.status-danger {
+    border-color: rgba(251, 113, 133, 0.4);
+    background: rgba(251, 113, 133, 0.09);
+    color: var(--danger);
+}
+
+.suspicious-table-wrapper {
+    height: 340px;
+}
+
+.suspicious-table-wrapper[hidden] {
+    display: none;
+}

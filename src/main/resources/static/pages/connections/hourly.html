@@ -1,0 +1,30 @@
+<section class="network-section hourly-chart-section">
+
+    <div class="section-header">
+        <div>
+            <h2>시간대별 네트워크 연결 수</h2>
+            <p>최근 24시간 동안 새롭게 발견된 연결 수입니다.</p>
+        </div>
+
+        <div class="chart-summary">
+            <div>
+                <span>24시간 전체 연결</span>
+                <strong id="hourlyTotalCount">0</strong>
+            </div>
+
+            <div>
+                <span>최대 연결 시간</span>
+                <strong id="hourlyPeakTime">-</strong>
+            </div>
+        </div>
+    </div>
+
+    <div id="hourlyChartStatus" class="chart-status">시간대별 연결 통계를 불러오는 중입니다.</div>
+
+    <div class="hourly-chart-scroll">
+        <div id="hourlyConnectionChart" class="hourly-chart" role="img" aria-label="최근 24시간 네트워크 연결 수 막대그래프">
+            <div class="hourly-chart-empty">그래프 데이터를 기다리는 중입니다.</div>
+        </div>
+    </div>
+
+</section>

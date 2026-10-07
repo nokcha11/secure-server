@@ -1,0 +1,638 @@
+@charset "UTF-8";
+
+/*
+ * 패킷 통신 분석 전체 영역
+ */
+.packet-chart-panel {
+    position: relative;
+
+    margin: 28px 16px 34px;
+    padding: 28px 26px 30px;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(17, 31, 55, 0.84),
+            rgba(8, 18, 36, 0.76)
+        );
+
+    box-shadow:
+        0 20px 45px rgba(0, 0, 0, 0.24),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+/*
+ * 패널 뒤쪽의 은은한 광원
+ */
+.packet-chart-panel::before {
+    content: "";
+
+    position: absolute;
+
+    top: -150px;
+    right: -100px;
+
+    width: 360px;
+    height: 360px;
+
+    border-radius: 50%;
+
+    background: rgba(37, 99, 235, 0.13);
+
+    filter: blur(75px);
+
+    pointer-events: none;
+}
+
+/*
+ * 실제 내용을 광원 위에 표시합니다.
+ */
+.packet-chart-panel > * {
+    position: relative;
+    z-index: 1;
+}
+
+/*
+ * 패킷 차트 제목 영역
+ */
+.packet-chart-panel .panel-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+.packet-chart-panel .panel-header h2 {
+    margin: 0;
+
+    color: #f8fafc;
+
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.packet-chart-panel .panel-header p {
+    margin: 8px 0 0;
+
+    color: #8fa9c9;
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/*
+ * 패킷 차트 조회 상태
+ */
+#packetChartStatus {
+    flex-shrink: 0;
+
+    padding: 8px 14px;
+
+    border: 1px solid rgba(96, 165, 250, 0.25);
+    border-radius: 999px;
+
+    background: rgba(37, 99, 235, 0.13);
+
+    color: #bfdbfe;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.07);
+
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+
+    white-space: nowrap;
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+/*
+ * 패킷 차트 카드 배치
+ */
+.packet-chart-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 20px;
+
+    margin-top: 26px;
+}
+
+/*
+ * 공통 차트 카드
+ */
+.packet-chart-card {
+    --packet-chart-accent: #60a5fa;
+    --packet-chart-glow: rgba(96, 165, 250, 0.17);
+
+    position: relative;
+
+    min-width: 0;
+    min-height: 350px;
+
+    padding: 23px 22px 24px;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(148, 163, 184, 0.16);
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(30, 47, 75, 0.55),
+            rgba(15, 29, 51, 0.38)
+        );
+
+    box-shadow:
+        0 14px 30px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.055);
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    transition:
+        transform 0.22s ease,
+        border-color 0.22s ease,
+        box-shadow 0.22s ease;
+}
+
+/*
+ * 카드 위쪽 강조선
+ */
+.packet-chart-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 22px;
+    right: 22px;
+
+    height: 3px;
+
+    border-radius: 0 0 8px 8px;
+
+    background:
+        var(--packet-chart-accent);
+
+    box-shadow:
+        0 0 16px var(--packet-chart-glow);
+}
+
+/*
+ * 카드 내부 광원
+ */
+.packet-chart-card::after {
+    content: "";
+
+    position: absolute;
+
+    right: -70px;
+    bottom: -90px;
+
+    width: 210px;
+    height: 210px;
+
+    border-radius: 50%;
+
+    background:
+        var(--packet-chart-glow);
+
+    filter: blur(55px);
+
+    pointer-events: none;
+}
+
+/*
+ * 차트 카드별 강조 색상
+ */
+.packet-chart-card:nth-child(1) {
+    --packet-chart-accent: #60a5fa;
+    --packet-chart-glow: rgba(96, 165, 250, 0.19);
+}
+
+.packet-chart-card:nth-child(2) {
+    --packet-chart-accent: #a78bfa;
+    --packet-chart-glow: rgba(167, 139, 250, 0.19);
+}
+
+.packet-chart-card:nth-child(3) {
+    --packet-chart-accent: #22d3ee;
+    --packet-chart-glow: rgba(34, 211, 238, 0.17);
+}
+
+.packet-chart-card:nth-child(4) {
+    --packet-chart-accent: #34d399;
+    --packet-chart-glow: rgba(52, 211, 153, 0.17);
+}
+
+.packet-chart-card:hover {
+    transform: translateY(-3px);
+
+    border-color: rgba(148, 163, 184, 0.28);
+
+    box-shadow:
+        0 19px 38px rgba(0, 0, 0, 0.26),
+        0 0 23px var(--packet-chart-glow),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/*
+ * 차트 카드 제목 영역
+ */
+.packet-chart-card-header {
+    position: relative;
+    z-index: 2;
+}
+
+.packet-chart-card-header h3 {
+    margin: 0;
+
+    color: #f1f5f9;
+
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.packet-chart-card-header p {
+    margin: 7px 0 0;
+
+    color: #8299b7;
+
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+/*
+ * 도넛 차트 전체 배치
+ */
+.packet-donut-chart {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 255px;
+
+    padding-top: 18px;
+}
+
+/*
+ * 도넛 차트와 범례 배치
+ */
+.packet-donut-layout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+
+    gap: 34px;
+}
+
+/*
+ * 도넛 모양
+ *
+ * JavaScript에서 --packet-donut-gradient 값을
+ * 동적으로 설정합니다.
+ */
+.packet-donut-ring {
+    --packet-donut-gradient:
+        conic-gradient(
+            #334155 0deg 360deg
+        );
+
+    position: relative;
+
+    flex: 0 0 auto;
+
+    width: 170px;
+    height: 170px;
+
+    border-radius: 50%;
+
+    background:
+        var(--packet-donut-gradient);
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.24),
+        0 0 26px rgba(96, 165, 250, 0.1);
+}
+
+/*
+ * 도넛 중앙의 빈 공간
+ */
+.packet-donut-ring::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 22px;
+
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(19, 35, 61, 0.97),
+            rgba(10, 22, 42, 0.97)
+        );
+
+    box-shadow:
+        inset 0 3px 12px rgba(0, 0, 0, 0.25);
+}
+
+/*
+ * 도넛 중앙의 숫자
+ */
+.packet-donut-center {
+    position: absolute;
+    z-index: 2;
+
+    top: 50%;
+    left: 50%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    transform: translate(-50%, -50%);
+}
+
+.packet-donut-total {
+    color: #f8fafc;
+
+    font-size: 27px;
+    font-weight: 800;
+    line-height: 1;
+
+    font-variant-numeric: tabular-nums;
+}
+
+.packet-donut-label {
+    margin-top: 7px;
+
+    color: #8299b7;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+/*
+ * 도넛 차트 범례
+ */
+.packet-chart-legend {
+    display: grid;
+
+    min-width: 185px;
+
+    gap: 11px;
+}
+
+.packet-chart-legend-item {
+    display: grid;
+
+    grid-template-columns:
+        10px minmax(0, 1fr) auto;
+
+    align-items: center;
+
+    gap: 9px;
+}
+
+.packet-chart-legend-dot {
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+
+    background:
+        var(--legend-color, #60a5fa);
+
+    box-shadow:
+        0 0 10px var(--legend-color, #60a5fa);
+}
+
+.packet-chart-legend-label {
+    overflow: hidden;
+
+    color: #b9c8db;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.packet-chart-legend-value {
+    color: #f1f5f9;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    font-variant-numeric: tabular-nums;
+}
+
+/*
+ * IP 및 도메인 순위 차트
+ */
+.packet-ranking-chart {
+    position: relative;
+    z-index: 2;
+
+    min-height: 255px;
+
+    padding-top: 21px;
+}
+
+.packet-ranking-list {
+    display: grid;
+
+    gap: 18px;
+}
+
+.packet-ranking-item {
+    min-width: 0;
+}
+
+.packet-ranking-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    min-width: 0;
+
+    gap: 12px;
+
+    margin-bottom: 8px;
+}
+
+.packet-ranking-name {
+    min-width: 0;
+
+    overflow: hidden;
+
+    color: #cbd5e1;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.packet-ranking-value {
+    flex-shrink: 0;
+
+    color: #f1f5f9;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    font-variant-numeric: tabular-nums;
+}
+
+/*
+ * 순위 차트 막대 배경
+ */
+.packet-ranking-track {
+    position: relative;
+
+    height: 9px;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background: rgba(51, 65, 85, 0.65);
+
+    box-shadow:
+        inset 0 1px 3px rgba(0, 0, 0, 0.28);
+}
+
+/*
+ * 순위 차트 실제 막대
+ */
+.packet-ranking-bar {
+    width: 0;
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--ranking-color, #38bdf8),
+            rgba(96, 165, 250, 0.72)
+        );
+
+    box-shadow:
+        0 0 13px
+        var(--ranking-color, #38bdf8);
+
+    transition: width 0.45s ease;
+}
+
+/*
+ * 데이터가 없을 때 안내 문구
+ */
+.packet-chart-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    min-height: 210px;
+
+    margin: 0;
+
+    color: #8299b7;
+
+    font-size: 13px;
+    text-align: center;
+}
+
+/*
+ * 태블릿 화면
+ */
+@media (max-width: 1000px) {
+    .packet-chart-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/*
+ * 작은 화면
+ */
+@media (max-width: 768px) {
+    .packet-chart-panel {
+        margin: 22px 12px 28px;
+        padding: 22px 18px 24px;
+    }
+
+    .packet-chart-panel .panel-header {
+        flex-direction: column;
+        align-items: stretch;
+
+        gap: 14px;
+    }
+
+    #packetChartStatus {
+        align-self: flex-start;
+
+        white-space: normal;
+    }
+}
+
+/*
+ * 모바일 화면
+ */
+@media (max-width: 560px) {
+    .packet-chart-panel {
+        margin-right: 8px;
+        margin-left: 8px;
+
+        padding: 20px 14px 22px;
+    }
+
+    .packet-chart-card {
+        min-height: 0;
+
+        padding: 21px 17px 22px;
+    }
+
+    .packet-donut-layout {
+        flex-direction: column;
+
+        gap: 25px;
+    }
+
+    .packet-chart-legend {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .packet-donut-ring {
+        width: 155px;
+        height: 155px;
+    }
+}

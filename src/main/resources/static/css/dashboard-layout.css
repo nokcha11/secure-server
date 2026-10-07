@@ -1,0 +1,733 @@
+/* SecureAgent 전체 레이아웃 */
+
+
+/* 상단 로고 */
+
+.top-header {
+    display: flex;
+    align-items: center;
+    padding: 24px 6%;
+	justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    background: rgba(11, 17, 32, 0.92);
+}
+
+.top-header h1 {
+    margin: 0;
+
+    color: var(--primary);
+    font-size: 28px;
+    letter-spacing: 0.5px;
+}
+
+.top-header p {
+    margin: 7px 0 0;
+
+    color: var(--muted);
+    font-size: 14px;
+}
+
+/*
+ * 로그인한 사용자가 현재 세션을
+ * 종료하기 위한 로그아웃 버튼입니다.
+ */
+.logout-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 96px;
+    padding: 10px 18px;
+
+    border: 1px solid rgba(56, 189, 248, 0.45);
+    border-radius: 9px;
+
+    background: rgba(56, 189, 248, 0.12);
+    color: #e5edf8;
+
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.logout-button:hover {
+    border-color: #38bdf8;
+    background: rgba(56, 189, 248, 0.24);
+}
+
+/* 전체 대시보드 */
+
+.dashboard-container {
+    width: min(1600px, 94%);
+    max-width: 94%;
+    min-width: 0;
+
+    margin: 30px auto 50px;
+}
+
+.panel,
+.network-section {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+
+    border: 1px solid var(--border);
+    border-radius: 15px;
+
+    background: rgba(17, 26, 46, 0.96);
+
+    box-shadow:
+        0 14px 35px rgba(0, 0, 0, 0.25);
+}
+
+.system-panel,
+.port-panel,
+.network-section {
+    padding: 24px;
+}
+
+.network-section {
+    margin-top: 22px;
+    overflow: hidden;
+}
+
+
+/* 패널 제목 */
+
+.panel-header,
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+    margin-bottom: 22px;
+}
+
+.panel-header h2,
+.section-header h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.panel-header p,
+.section-header p {
+    margin: 7px 0 0;
+
+    color: var(--muted);
+    font-size: 13px;
+}
+
+
+/* 시스템 정보 제어 영역 */
+
+.system-panel-header {
+    align-items: flex-start;
+}
+
+.system-controls {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.system-control-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#lastCollectedAt {
+    margin: 0;
+
+    color: var(--muted);
+    font-size: 13px;
+    text-align: right;
+}
+
+
+/* 시스템 정보 카드 */
+
+.system-info-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 15px;
+}
+
+.info-item {
+    min-height: 88px;
+    padding: 17px;
+
+    border: 1px solid var(--border);
+    border-radius: 11px;
+
+    background: var(--panel-light);
+}
+
+.info-label {
+    display: block;
+    margin-bottom: 12px;
+
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.info-item strong {
+    display: block;
+    overflow: hidden;
+
+    color: #fff;
+    font-size: 17px;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* 포트 통계 카드 */
+
+.summary-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 16px;
+    margin: 22px 0;
+}
+
+.summary-card {
+    position: relative;
+    overflow: hidden;
+
+    min-height: 120px;
+    padding: 22px;
+
+    border: 1px solid var(--border);
+    border-radius: 13px;
+
+    background: var(--panel);
+}
+
+.summary-card::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 5px;
+    height: 100%;
+
+    background: var(--primary);
+    content: "";
+}
+
+.summary-card span {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.summary-card strong {
+    display: block;
+    margin-top: 14px;
+
+    color: var(--primary);
+    font-size: 34px;
+}
+
+.tcp-card::before {
+    background: #818cf8;
+}
+
+.tcp-card strong {
+    color: #a5b4fc;
+}
+
+.udp-card::before {
+    background: var(--success);
+}
+
+.udp-card strong {
+    color: var(--success);
+}
+
+.warning-card::before {
+    background: var(--warning);
+}
+
+.warning-card strong {
+    color: var(--warning);
+}
+
+
+/* 검색과 필터 */
+
+.filter-area,
+.network-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.filter-area select {
+    min-width: 155px;
+}
+
+.network-controls select {
+    min-width: 205px;
+}
+
+
+/* 태블릿 */
+
+@media (max-width: 1000px) {
+    .system-info-grid,
+    .summary-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .panel-header,
+    .section-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .system-controls {
+        align-items: stretch;
+        width: 100%;
+    }
+
+    .system-control-row,
+    .filter-area,
+    .network-controls {
+        width: 100%;
+    }
+
+    #computerSelect,
+    .filter-area input,
+    .network-controls input {
+        flex: 1;
+        width: auto;
+    }
+
+    #lastCollectedAt {
+        text-align: left;
+    }
+}
+
+
+/* 모바일 */
+
+@media (max-width: 600px) {
+    .top-header {
+        padding: 20px;
+    }
+
+    .top-header p {
+        display: none;
+    }
+
+    .dashboard-container {
+        width: calc(100% - 24px);
+        max-width: calc(100% - 24px);
+        margin-top: 18px;
+    }
+
+    .system-panel,
+    .port-panel,
+    .network-section {
+        padding: 17px;
+    }
+
+    .system-info-grid,
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .system-control-row,
+    .filter-area,
+    .network-controls {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    #computerSelect,
+    #refreshButton,
+    .filter-area input,
+    .filter-area select,
+    .network-controls input,
+    .network-controls select {
+        width: 100%;
+    }
+}
+
+/*
+ * 로그인 계정 관련 버튼 배치
+ */
+.account-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+/*
+ * 비밀번호 변경 버튼
+ */
+.password-change-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 120px;
+    padding: 10px 18px;
+
+    border: 1px solid rgba(129, 140, 248, 0.5);
+    border-radius: 9px;
+
+    background: rgba(99, 102, 241, 0.14);
+    color: #e5edf8;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.password-change-button:hover {
+    transform: translateY(-1px);
+
+    border-color: #818cf8;
+    background: rgba(99, 102, 241, 0.26);
+}
+
+
+/*
+ * 비밀번호 변경 창의 전체 배경입니다.
+ */
+.password-change-modal {
+    position: fixed;
+    inset: 0;
+
+    z-index: 1000;
+
+    display: grid;
+    place-items: center;
+
+    padding: 20px;
+
+    background: rgba(2, 6, 23, 0.76);
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+
+/*
+ * hidden 속성이 설정되면
+ * 변경 창을 화면에서 숨깁니다.
+ */
+.password-change-modal[hidden] {
+    display: none;
+}
+
+
+/*
+ * 비밀번호 변경 입력 영역입니다.
+ */
+.password-change-dialog {
+    width: min(460px, 100%);
+
+    padding: 26px;
+
+    border: 1px solid rgba(96, 165, 250, 0.3);
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(30, 41, 59, 0.96),
+            rgba(15, 23, 42, 0.96)
+        );
+
+    box-shadow:
+        0 24px 60px rgba(0, 0, 0, 0.48),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+
+/*
+ * 제목과 닫기 버튼을 배치합니다.
+ */
+.password-change-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+
+    margin-bottom: 24px;
+}
+
+.password-change-header h2 {
+    margin: 0;
+
+    color: #f8fafc;
+    font-size: 21px;
+}
+
+.password-change-header p {
+    margin: 7px 0 0;
+
+    color: #94a3b8;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+
+/*
+ * 비밀번호 변경 창 닫기 버튼입니다.
+ */
+.password-change-close-button {
+    width: 34px;
+    height: 34px;
+
+    border: 1px solid rgba(148, 163, 184, 0.28);
+    border-radius: 9px;
+
+    background: rgba(15, 23, 42, 0.58);
+    color: #cbd5e1;
+
+    font-size: 22px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+.password-change-close-button:hover {
+    border-color: rgba(248, 113, 113, 0.6);
+    color: #fca5a5;
+}
+
+
+/*
+ * 비밀번호 입력 폼입니다.
+ */
+.password-change-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.password-change-form label {
+    margin-top: 4px;
+
+    color: #cbd5e1;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.password-change-form input {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 12px 14px;
+
+    border: 1px solid rgba(100, 116, 139, 0.5);
+    border-radius: 9px;
+
+    outline: none;
+
+    background: rgba(15, 23, 42, 0.72);
+    color: #f8fafc;
+}
+
+.password-change-form input:focus {
+    border-color: #60a5fa;
+
+    box-shadow:
+        0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+
+/*
+ * 새 비밀번호 조건 안내 문구입니다.
+ */
+.password-change-guide {
+    margin: -2px 0 4px;
+
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+
+/*
+ * 비밀번호 변경 결과 메시지입니다.
+ */
+.password-change-status {
+    min-height: 21px;
+
+    margin: 4px 0 0;
+
+    color: #cbd5e1;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.password-change-status.is-error {
+    color: #fca5a5;
+}
+
+.password-change-status.is-success {
+    color: #6ee7b7;
+}
+
+
+/*
+ * 취소 및 변경 버튼 배치입니다.
+ */
+.password-change-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+
+    margin-top: 8px;
+}
+
+.password-change-cancel-button,
+.password-change-submit-button {
+    padding: 11px 16px;
+
+    border-radius: 9px;
+
+    color: #f8fafc;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.password-change-cancel-button {
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    background: rgba(51, 65, 85, 0.56);
+}
+
+.password-change-submit-button {
+    border: 1px solid rgba(56, 189, 248, 0.55);
+    background: rgba(14, 165, 233, 0.28);
+}
+
+.password-change-cancel-button:hover {
+    background: rgba(71, 85, 105, 0.76);
+}
+
+.password-change-submit-button:hover {
+    background: rgba(14, 165, 233, 0.42);
+}
+
+.password-change-submit-button:disabled {
+    cursor: wait;
+    opacity: 0.65;
+}
+
+
+/*
+ * 비밀번호 변경 창이 열렸을 때
+ * 뒤쪽 화면 스크롤을 막습니다.
+ */
+body.password-modal-open {
+    overflow: hidden;
+}
+
+
+/*
+ * 모바일 화면에서는 버튼과 입력 창의
+ * 크기를 화면 너비에 맞게 조절합니다.
+ */
+@media (max-width: 600px) {
+
+    .top-header {
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .account-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .password-change-button,
+    .logout-button {
+        min-width: 100px;
+        padding: 9px 12px;
+    }
+
+    .password-change-dialog {
+        padding: 20px;
+    }
+
+    .password-change-actions {
+        grid-template-columns: 1fr;
+    }
+}
+
+.admin-password-reset-button[hidden],
+.admin-account-unlock-button[hidden] {
+    display: none !important;
+}
+
+/*
+ * 비밀번호 입력칸과 보기 버튼을
+ * 같은 영역에 배치합니다.
+ */
+.password-input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-input-wrapper input {
+    width: 100%;
+    box-sizing: border-box;
+    padding-right: 72px;
+}
+
+.password-visibility-button {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+
+    transform: translateY(-50%);
+
+    padding: 5px 8px;
+
+    border: 1px solid rgba(56, 189, 248, 0.32);
+    border-radius: 7px;
+
+    background: rgba(15, 23, 42, 0.76);
+    color: #7dd3fc;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.password-visibility-button:hover {
+    border-color: rgba(56, 189, 248, 0.75);
+    background: rgba(14, 116, 144, 0.35);
+    color: #e0f2fe;
+}
+
+.password-visibility-button:focus-visible {
+    outline: 2px solid #38bdf8;
+    outline-offset: 2px;
+}

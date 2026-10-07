@@ -1,0 +1,310 @@
+/* 연결 분석 오른쪽 중간 플로팅 퀵 메뉴 */
+.connection-floating-nav {
+    position: fixed;
+    top: 50%;
+    right: 22px;
+    bottom: auto;
+    left: auto;
+    z-index: 1200;
+
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+
+    width: 176px;
+    min-height: 0;
+    padding: 14px 12px;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(56, 189, 248, 0.26);
+    border-radius: 32px 18px 32px 18px;
+
+    background:
+        linear-gradient(
+            155deg,
+            rgba(11, 17, 32, 0.95),
+            rgba(10, 31, 48, 0.9)
+        );
+
+    box-shadow:
+        0 22px 54px rgba(0, 0, 0, 0.42),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+    transform: translateY(-50%);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    animation: connectionDockFloat 4.8s ease-in-out infinite;
+
+    transition:
+        width 0.22s ease,
+        border-color 0.22s ease,
+        box-shadow 0.22s ease,
+        transform 0.22s ease;
+}
+
+.connection-floating-nav::before {
+    content: "";
+
+    position: absolute;
+    top: -46px;
+    right: -36px;
+
+    width: 120px;
+    height: 120px;
+
+    border-radius: 50%;
+
+    background: rgba(34, 211, 238, 0.09);
+
+    filter: blur(28px);
+
+    pointer-events: none;
+}
+
+.connection-floating-nav::after {
+    content: "";
+
+    position: absolute;
+    bottom: -42px;
+    left: -38px;
+
+    width: 112px;
+    height: 112px;
+
+    border-radius: 50%;
+
+    background: rgba(99, 102, 241, 0.08);
+
+    filter: blur(30px);
+
+    pointer-events: none;
+}
+
+.connection-floating-nav:hover {
+    width: 190px;
+
+    border-color: rgba(103, 232, 249, 0.44);
+
+    box-shadow:
+        0 24px 64px rgba(0, 0, 0, 0.48),
+        0 0 30px rgba(34, 211, 238, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.07);
+
+    transform:
+        translateY(-50%)
+        translateX(-7px)
+        scale(1.015);
+
+    animation-play-state: paused;
+}
+
+.connection-floating-selection-status,
+.connection-floating-buttons {
+    position: relative;
+    z-index: 1;
+}
+
+.connection-floating-selection-status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 9px;
+
+    padding: 6px 10px 3px;
+}
+
+.connection-floating-selection-status span {
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.connection-floating-selection-status strong {
+    color: #67e8f9;
+    font-size: 15px;
+    font-weight: 900;
+}
+
+.connection-floating-buttons {
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.connection-floating-button {
+    position: relative;
+
+    width: 100%;
+    min-height: 40px;
+    padding: 0 14px;
+
+    border: 1px solid rgba(71, 85, 105, 0.74);
+    border-radius: 999px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(23, 35, 59, 0.76),
+            rgba(15, 28, 47, 0.64)
+        );
+
+    color: #cbd5e1;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.18s ease,
+        border-color 0.18s ease,
+        background-color 0.18s ease,
+        color 0.18s ease,
+        box-shadow 0.18s ease;
+}
+
+.connection-floating-button:hover:not(:disabled) {
+    transform: translateX(-4px);
+
+    border-color: rgba(56, 189, 248, 0.48);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(34, 211, 238, 0.14),
+            rgba(59, 130, 246, 0.1)
+        );
+
+    color: #ecfeff;
+
+    box-shadow: 0 8px 22px rgba(34, 211, 238, 0.08);
+}
+
+.connection-floating-button.active {
+    border-color: rgba(34, 211, 238, 0.42);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(34, 211, 238, 0.17),
+            rgba(59, 130, 246, 0.12)
+        );
+
+    color: #a5f3fc;
+}
+
+.connection-floating-button.primary {
+    border-color: rgba(34, 211, 238, 0.44);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(34, 211, 238, 0.18),
+            rgba(14, 116, 144, 0.14)
+        );
+
+    color: #a5f3fc;
+}
+
+.connection-floating-button.danger {
+    border-color: rgba(244, 63, 94, 0.18);
+    color: #fda4af;
+}
+
+.connection-floating-button.danger:hover:not(:disabled) {
+    border-color: rgba(244, 63, 94, 0.34);
+    background: rgba(244, 63, 94, 0.08);
+    color: #fecdd3;
+}
+
+.connection-floating-button:disabled {
+    opacity: 0.38;
+    cursor: default;
+}
+
+@keyframes connectionDockFloat {
+    0%,
+    100% {
+        transform: translateY(-50%) translateY(-3px);
+    }
+
+    50% {
+        transform: translateY(-50%) translateY(3px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .connection-floating-nav {
+        animation: none;
+    }
+}
+
+@media (max-width: 1180px) {
+    .connection-floating-nav {
+        right: 12px;
+        width: 164px;
+    }
+
+    .connection-floating-nav:hover {
+        width: 176px;
+    }
+}
+
+@media (max-width: 820px) {
+    .connection-floating-nav,
+    .connection-floating-nav:hover {
+        top: auto;
+        right: 12px;
+        bottom: 12px;
+        left: 12px;
+
+        width: auto;
+
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        border-radius: 24px;
+
+        transform: none;
+        animation: none;
+    }
+
+    .connection-floating-selection-status {
+        flex: 0 0 auto;
+    }
+
+    .connection-floating-buttons {
+        flex: 1 1 auto;
+        flex-direction: row;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+    }
+
+    .connection-floating-button {
+        width: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .connection-floating-nav,
+    .connection-floating-nav:hover {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .connection-floating-buttons {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .connection-floating-button {
+        width: 100%;
+    }
+}

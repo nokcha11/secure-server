@@ -1,0 +1,46 @@
+{
+  "properties": [
+    {
+      "name": "secureagent.admin.username",
+      "type": "java.lang.String",
+      "description": "최초로 생성할 SecureAgent 관리자 아이디입니다.",
+      "defaultValue": "admin"
+    },
+    {
+      "name": "secureagent.admin.initial-password",
+      "type": "java.lang.String",
+      "description": "환경변수에서 전달받는 최초 관리자 비밀번호입니다."
+    },
+    {
+      "name": "secureagent.user.username",
+      "type": "java.lang.String",
+      "description": "최초로 생성할 SecureAgent 일반 사용자 아이디입니다.",
+      "defaultValue": "user"
+    },
+    {
+      "name": "secureagent.user.initial-password",
+      "type": "java.lang.String",
+      "description": "환경변수에서 전달받는 최초 일반 사용자 비밀번호입니다."
+    },
+    {
+      "name": "secureagent.agent.api-key",
+      "type": "java.lang.String",
+      "description": "STS3 에이전트가 데이터 전송 요청에 사용하는 비밀 API Key입니다."
+    },
+    {
+      "name": "secure.ssh.private-key-path",
+      "type": "java.lang.String",
+      "description": "SSH 공개키 인증에 사용할 개인키 파일 경로입니다."
+    },
+    {
+      "name": "secure.ssh.known-hosts-path",
+      "type": "java.lang.String",
+      "description": "신뢰하는 SSH 서버의 Host Key가 저장된 known_hosts 파일 경로입니다."
+    },
+    {
+      "name": "secure.ssh.allowed-hosts",
+      "type": "java.lang.String",
+      "description": "SSH 접속을 허용하는 서버 주소 목록입니다. 여러 대상은 쉼표로 구분합니다."
+    }
+  ]
+}

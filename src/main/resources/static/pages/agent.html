@@ -1,0 +1,554 @@
+<!-- ========================================
+     에이전트 상태
+     ======================================== -->
+
+
+<!-- ========================================
+     시스템 정보
+     ======================================== -->
+<section class="panel system-panel">
+
+    <div class="panel-header system-panel-header">
+
+        <div>
+            <h2>에이전트 시스템 정보</h2>
+
+            <p>
+                조회할 PC를 선택하세요.
+            </p>
+        </div>
+
+
+        <div class="system-controls">
+
+            <div class="system-control-row">
+
+                <select id="computerSelect">
+                    <option value="">
+                        PC 정보를 불러오는 중...
+                    </option>
+                </select>
+
+
+                <button
+                    id="refreshButton"
+                    type="button">
+                    새로고침
+                </button>
+
+            </div>
+
+
+            <p id="lastCollectedAt">
+                마지막 수집 시각: -
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="system-info-grid">
+
+        <div class="info-item">
+
+            <span class="info-label">
+                PC 이름
+            </span>
+
+            <strong id="computerName">
+                -
+            </strong>
+
+        </div>
+
+
+        <div class="info-item">
+
+            <span class="info-label">
+                운영체제
+            </span>
+
+            <strong id="osName">
+                -
+            </strong>
+
+        </div>
+
+
+        <div class="info-item">
+
+            <span class="info-label">
+                OS 버전
+            </span>
+
+            <strong id="osVersion">
+                -
+            </strong>
+
+        </div>
+
+
+        <div class="info-item">
+
+            <span class="info-label">
+                사용자 이름
+            </span>
+
+            <strong id="userName">
+                -
+            </strong>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================
+     에이전트 수집 상태
+     ======================================== -->
+<section class="panel agent-health-panel">
+
+    <div class="agent-health-header">
+
+        <div>
+
+            <div class="agent-health-title-row">
+
+                <h2>
+                    에이전트 수집 상태
+                </h2>
+
+
+                <span
+                    id="agentCollectionBadge"
+                    class="agent-collection-badge is-waiting">
+
+                    <span class="agent-collection-badge-dot"></span>
+
+                    조회 대기
+
+                </span>
+
+            </div>
+
+
+            <p>
+                현재 선택한 PC에서 확보된
+                보안 수집 데이터의 상태를 확인합니다.
+            </p>
+
+        </div>
+
+
+        <div class="agent-health-latest">
+
+            <span>
+                최근 데이터
+            </span>
+
+            <strong id="agentLatestRelative">
+                -
+            </strong>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ========================================
+         수집 현황 카드
+         ======================================== -->
+    <div class="agent-health-grid">
+
+
+        <!-- 에이전트 -->
+        <article class="agent-health-card agent-card-main">
+
+            <div class="agent-health-card-top">
+
+                <span class="agent-health-icon agent-icon">
+                    A
+                </span>
+
+
+                <span
+                    id="agentDataState"
+                    class="agent-health-state is-waiting">
+
+                    대기
+
+                </span>
+
+            </div>
+
+
+            <div class="agent-health-card-body">
+
+                <span class="agent-health-card-label">
+                    에이전트
+                </span>
+
+
+                <strong
+                    id="agentCollectionStatus"
+                    class="agent-health-card-value agent-status-value">
+
+                    조회 대기
+
+                </strong>
+
+
+                <p id="agentCollectionMessage">
+                    수집 데이터를 확인하고 있습니다.
+                </p>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- 열린 포트 -->
+        <article class="agent-health-card">
+
+            <div class="agent-health-card-top">
+
+                <span class="agent-health-icon port-icon">
+                    P
+                </span>
+
+
+                <span
+                    id="agentPortState"
+                    class="agent-health-state is-waiting">
+
+                    대기
+
+                </span>
+
+            </div>
+
+
+            <div class="agent-health-card-body">
+
+                <span class="agent-health-card-label">
+                    열린 포트
+                </span>
+
+
+                <strong
+                    id="agentPortCount"
+                    class="agent-health-card-value">
+
+                    -건
+
+                </strong>
+
+
+                <p>
+                    현재 저장된 열린 포트 수집 결과
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="agent-health-link"
+                data-agent-page-target="ports">
+
+                포트 분석 보기
+                <span aria-hidden="true">→</span>
+
+            </button>
+
+        </article>
+
+
+
+        <!-- 네트워크 연결 -->
+        <article class="agent-health-card">
+
+            <div class="agent-health-card-top">
+
+                <span class="agent-health-icon network-icon">
+                    N
+                </span>
+
+
+                <span
+                    id="agentNetworkState"
+                    class="agent-health-state is-waiting">
+
+                    대기
+
+                </span>
+
+            </div>
+
+
+            <div class="agent-health-card-body">
+
+                <span class="agent-health-card-label">
+                    네트워크 연결
+                </span>
+
+
+                <strong
+                    id="agentNetworkCount"
+                    class="agent-health-card-value">
+
+                    -건
+
+                </strong>
+
+
+                <p>
+                    현재 PC의 네트워크 연결 데이터
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="agent-health-link"
+                data-agent-page-target="connections">
+
+                연결 분석 보기
+                <span aria-hidden="true">→</span>
+
+            </button>
+
+        </article>
+
+
+
+        <!-- 패킷 -->
+        <article class="agent-health-card">
+
+            <div class="agent-health-card-top">
+
+                <span class="agent-health-icon packet-icon">
+                    D
+                </span>
+
+
+                <span
+                    id="agentPacketState"
+                    class="agent-health-state is-waiting">
+
+                    대기
+
+                </span>
+
+            </div>
+
+
+            <div class="agent-health-card-body">
+
+                <span class="agent-health-card-label">
+                    패킷 메타데이터
+                </span>
+
+
+                <strong
+                    id="agentPacketCount"
+                    class="agent-health-card-value">
+
+                    -건
+
+                </strong>
+
+
+                <p>
+                    DNS·HTTP·HTTPS 통신 메타데이터
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="agent-health-link"
+                data-agent-page-target="packets">
+
+                패킷 분석 보기
+                <span aria-hidden="true">→</span>
+
+            </button>
+
+        </article>
+
+    </div>
+
+
+
+    <!-- ========================================
+         최근 수집 정보
+         ======================================== -->
+    <div class="agent-collection-history">
+
+        <div class="agent-collection-history-header">
+
+            <div>
+                <h3>
+                    최근 수집 정보
+                </h3>
+
+                <p>
+                    각 수집 항목에서 확인된
+                    가장 최근 데이터 시각입니다.
+                </p>
+            </div>
+
+
+            <span class="agent-collection-basis">
+                저장 데이터 기준
+            </span>
+
+        </div>
+
+
+        <div class="agent-collection-timeline">
+
+
+            <!-- 시스템 정보 -->
+            <div class="agent-collection-item">
+
+                <div class="agent-collection-item-heading">
+
+                    <span class="agent-timeline-dot system-dot"></span>
+
+                    <span>
+                        시스템 정보
+                    </span>
+
+                </div>
+
+
+                <strong id="agentSystemCollectedAt">
+                    -
+                </strong>
+
+
+                <span
+                    id="agentSystemRelative"
+                    class="agent-collection-relative">
+
+                    수집 정보 없음
+
+                </span>
+
+            </div>
+
+
+
+            <!-- 열린 포트 -->
+            <div class="agent-collection-item">
+
+                <div class="agent-collection-item-heading">
+
+                    <span class="agent-timeline-dot port-dot"></span>
+
+                    <span>
+                        열린 포트
+                    </span>
+
+                </div>
+
+
+                <strong id="agentPortCollectedAt">
+                    -
+                </strong>
+
+
+                <span
+                    id="agentPortRelative"
+                    class="agent-collection-relative">
+
+                    수집 정보 없음
+
+                </span>
+
+            </div>
+
+
+
+            <!-- 네트워크 연결 -->
+            <div class="agent-collection-item">
+
+                <div class="agent-collection-item-heading">
+
+                    <span class="agent-timeline-dot network-dot"></span>
+
+                    <span>
+                        네트워크 연결
+                    </span>
+
+                </div>
+
+
+                <strong id="agentNetworkCollectedAt">
+                    -
+                </strong>
+
+
+                <span
+                    id="agentNetworkRelative"
+                    class="agent-collection-relative">
+
+                    수집 정보 없음
+
+                </span>
+
+            </div>
+
+
+
+            <!-- 패킷 -->
+            <div class="agent-collection-item">
+
+                <div class="agent-collection-item-heading">
+
+                    <span class="agent-timeline-dot packet-dot"></span>
+
+                    <span>
+                        패킷 메타데이터
+                    </span>
+
+                </div>
+
+
+                <strong id="agentPacketCollectedAt">
+                    -
+                </strong>
+
+
+                <span
+                    id="agentPacketRelative"
+                    class="agent-collection-relative">
+
+                    수집 정보 없음
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <p class="agent-health-footnote">
+        ※ 수집 상태는 실시간 heartbeat가 아니라
+        서버에 저장된 최신 수집 데이터를 기준으로 표시합니다.
+    </p>
+
+</section>

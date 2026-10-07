@@ -1,0 +1,749 @@
+/* ========================================
+   SecureAgent 연결 분석 Floating Dock
+
+   - 모든 페이지에서 표시
+   - 기본 상태에서는 아이콘 3개
+   - Hover 시 왼쪽으로 확장
+   - Glassmorphism
+   - 천천히 위아래로 떠다니는 효과
+   - 선택 개수는 아이콘 중앙에 표시
+   ======================================== */
+
+
+/* ========================================
+   전체 위치
+   ======================================== */
+
+.secure-floating-dock {
+    position: fixed;
+
+    top: 50%;
+    right: 22px;
+
+    z-index: 1300;
+
+    transform: translateY(-50%);
+
+    pointer-events: none;
+
+    animation:
+        secure-floating-bob
+        4.6s
+        ease-in-out
+        infinite;
+
+    will-change: transform;
+}
+
+
+/* 조작할 때는 이동을 멈춤 */
+
+.secure-floating-dock:hover,
+.secure-floating-dock:focus-within {
+    animation-play-state: paused;
+}
+
+
+/* ========================================
+   두둥실 움직임
+   ======================================== */
+
+@keyframes secure-floating-bob {
+
+    0%,
+    100% {
+        transform:
+            translateY(-50%)
+            translateY(-7px);
+    }
+
+    50% {
+        transform:
+            translateY(-50%)
+            translateY(7px);
+    }
+
+}
+
+
+/* ========================================
+   Glass 본체
+   ======================================== */
+
+.secure-floating-main {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    gap: 10px;
+
+    width: 68px;
+
+    padding: 13px 10px;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        rgba(103, 232, 249, 0.28);
+
+    border-radius:
+        38px
+        25px
+        40px
+        24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(15, 37, 59, 0.72),
+            rgba(7, 20, 36, 0.64)
+        );
+
+    box-shadow:
+        0 22px 55px rgba(0, 0, 0, 0.42),
+
+        0 0 0 1px
+        rgba(56, 189, 248, 0.035),
+
+        0 0 30px
+        rgba(34, 211, 238, 0.10),
+
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.13),
+
+        inset 0 -1px 0
+        rgba(56, 189, 248, 0.08);
+
+    backdrop-filter:
+        blur(22px)
+        saturate(175%);
+
+    -webkit-backdrop-filter:
+        blur(22px)
+        saturate(175%);
+
+    pointer-events: auto;
+
+    transition:
+        width 0.28s
+        cubic-bezier(
+            0.2,
+            0.8,
+            0.2,
+            1
+        ),
+
+        transform 0.25s ease,
+
+        border-color 0.22s ease,
+
+        box-shadow 0.22s ease,
+
+        background 0.22s ease;
+}
+
+
+/* ========================================
+   유리 표면 반사
+   ======================================== */
+
+.secure-floating-main::before {
+    content: "";
+
+    position: absolute;
+
+    top: 2px;
+    left: 4px;
+    right: 4px;
+
+    height: 46%;
+
+    border-radius:
+        34px
+        22px
+        40px
+        20px;
+
+    background:
+        linear-gradient(
+            155deg,
+            rgba(255, 255, 255, 0.14),
+            rgba(125, 211, 252, 0.055) 40%,
+            transparent 72%
+        );
+
+    opacity: 0.72;
+
+    pointer-events: none;
+}
+
+
+/* ========================================
+   내부 Cyan Glow
+   ======================================== */
+
+.secure-floating-main::after {
+    content: "";
+
+    position: absolute;
+
+    top: 16%;
+    right: -38px;
+
+    width: 110px;
+    height: 190px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(34, 211, 238, 0.20),
+            rgba(14, 165, 233, 0.08) 45%,
+            transparent 72%
+        );
+
+    filter: blur(16px);
+
+    opacity: 0.8;
+
+    pointer-events: none;
+
+    transition:
+        right 0.28s ease,
+        opacity 0.28s ease;
+}
+
+
+/* ========================================
+   Hover 확장
+   ======================================== */
+
+.secure-floating-main:hover,
+.secure-floating-main:focus-within {
+    width: 190px;
+
+    border-color:
+        rgba(103, 232, 249, 0.58);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(15, 42, 65, 0.82),
+            rgba(7, 22, 39, 0.76)
+        );
+
+    box-shadow:
+        0 28px 70px
+        rgba(0, 0, 0, 0.46),
+
+        0 0 0 1px
+        rgba(103, 232, 249, 0.07),
+
+        0 0 42px
+        rgba(34, 211, 238, 0.17),
+
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.16),
+
+        inset 0 -1px 0
+        rgba(56, 189, 248, 0.10);
+
+    transform:
+        translateX(-8px);
+}
+
+
+.secure-floating-main:hover::after,
+.secure-floating-main:focus-within::after {
+    right: -4px;
+
+    opacity: 1;
+}
+
+
+/* ========================================
+   플롯 버튼
+   ======================================== */
+
+.secure-floating-connection-button {
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    min-height: 48px;
+
+    padding: 0 8px;
+
+    gap: 11px;
+
+    /*
+     * 선택 개수가 잘리지 않도록
+     * 기존 hidden 대신 visible
+     */
+    overflow: visible;
+
+    border:
+        1px solid
+        rgba(148, 163, 184, 0.08);
+
+    border-radius: 999px;
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    color: #b6c7db;
+
+    cursor: pointer;
+
+    transition:
+        color 0.18s ease,
+        background 0.18s ease,
+        border-color 0.18s ease,
+        transform 0.18s ease,
+        box-shadow 0.18s ease;
+}
+
+
+/* ========================================
+   버튼 Hover
+   ======================================== */
+
+.secure-floating-connection-button:hover,
+.secure-floating-connection-button:focus-visible {
+    color: #ecfeff;
+
+    border-color:
+        rgba(103, 232, 249, 0.42);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(34, 211, 238, 0.17),
+            rgba(59, 130, 246, 0.09)
+        );
+
+    transform:
+        translateX(-2px);
+
+    box-shadow:
+        0 8px 22px
+        rgba(0, 0, 0, 0.16),
+
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.08),
+
+        0 0 18px
+        rgba(34, 211, 238, 0.08);
+}
+
+
+/* ========================================
+   현재 활성 메뉴
+   ======================================== */
+
+.secure-floating-connection-button.active {
+    color: #cffafe;
+
+    border-color:
+        rgba(34, 211, 238, 0.60);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(34, 211, 238, 0.25),
+            rgba(14, 116, 144, 0.12)
+        );
+
+    box-shadow:
+        0 0 0 1px
+        rgba(34, 211, 238, 0.06),
+
+        0 0 23px
+        rgba(34, 211, 238, 0.14),
+
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.11);
+}
+
+
+/* ========================================
+   아이콘 원
+   ======================================== */
+
+.secure-floating-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 34px;
+
+    width: 34px;
+    height: 34px;
+
+    border:
+        1px solid
+        rgba(125, 211, 252, 0.18);
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(56, 189, 248, 0.11),
+            rgba(30, 64, 175, 0.06)
+        );
+
+    color: #bae6fd;
+
+    font-size: 15px;
+    font-weight: 900;
+
+    text-shadow:
+        0 0 8px
+        rgba(103, 232, 249, 0.25);
+
+    box-shadow:
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.08),
+
+        0 0 14px
+        rgba(56, 189, 248, 0.06);
+
+    transition:
+        background 0.18s ease,
+        border-color 0.18s ease,
+        color 0.18s ease,
+        box-shadow 0.18s ease,
+        transform 0.18s ease;
+}
+
+
+/* 버튼 hover 아이콘 */
+
+.secure-floating-connection-button:hover
+.secure-floating-icon {
+    border-color:
+        rgba(103, 232, 249, 0.48);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(34, 211, 238, 0.22),
+            rgba(59, 130, 246, 0.12)
+        );
+
+    color: #ecfeff;
+
+    transform:
+        scale(1.06);
+
+    box-shadow:
+        0 0 20px
+        rgba(34, 211, 238, 0.14),
+
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.13);
+}
+
+
+/* 활성 아이콘 */
+
+.secure-floating-connection-button.active
+.secure-floating-icon {
+    border-color:
+        rgba(103, 232, 249, 0.68);
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            rgba(103, 232, 249, 0.28),
+            rgba(14, 116, 144, 0.13)
+        );
+
+    color: #ecfeff;
+
+    box-shadow:
+        0 0 22px
+        rgba(34, 211, 238, 0.20),
+
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.14);
+}
+
+
+/* ========================================
+   메뉴 텍스트
+   ======================================== */
+
+.secure-floating-label {
+    max-width: 0;
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    white-space: nowrap;
+
+    color: inherit;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    transform:
+        translateX(-6px);
+
+    transition:
+        max-width 0.28s ease,
+        opacity 0.18s ease,
+        transform 0.22s ease;
+}
+
+
+.secure-floating-main:hover
+.secure-floating-label,
+.secure-floating-main:focus-within
+.secure-floating-label {
+    max-width: 115px;
+
+    opacity: 1;
+
+    transform:
+        translateX(0);
+}
+
+
+/* ========================================
+   선택 개수
+
+   핵심 수정:
+   오른쪽 외곽에 배치하지 않고
+   세 번째 버튼 중앙에 완전히 들어오게 함
+   ======================================== */
+
+.secure-floating-count {
+    position: absolute;
+
+    /*
+     * 버튼의 가운데
+     */
+    top: 1px;
+    left: 50%;
+    right: auto;
+
+    z-index: 6;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 30px;
+    height: 18px;
+
+    padding: 0 5px;
+
+    border:
+        1px solid
+        rgba(103, 232, 249, 0.48);
+
+    border-radius: 999px;
+
+    background:
+        rgba(4, 17, 29, 0.94);
+
+    color: #67e8f9;
+
+    font-size: 9px;
+    font-weight: 900;
+
+    line-height: 1;
+
+    white-space: nowrap;
+
+    transform:
+        translateX(-50%);
+
+    text-shadow:
+        0 0 9px
+        rgba(34, 211, 238, 0.35);
+
+    box-shadow:
+        0 4px 14px
+        rgba(0, 0, 0, 0.30),
+
+        0 0 13px
+        rgba(34, 211, 238, 0.12),
+
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.08);
+
+    transition:
+        top 0.2s ease,
+        left 0.2s ease,
+        right 0.2s ease,
+        transform 0.2s ease,
+        min-width 0.2s ease,
+        height 0.2s ease;
+}
+
+
+/* ========================================
+   펼쳐졌을 때
+
+   메뉴명 오른쪽에 개수 표시
+   ======================================== */
+
+.secure-floating-main:hover
+.secure-floating-count,
+.secure-floating-main:focus-within
+.secure-floating-count {
+    top: 50%;
+
+    left: auto;
+    right: 10px;
+
+    min-width: 34px;
+    height: 22px;
+
+    transform:
+        translateY(-50%);
+}
+
+
+/* ========================================
+   아주 약한 숨쉬기 효과
+   ======================================== */
+
+@keyframes secure-active-breathe {
+
+    0%,
+    100% {
+        box-shadow:
+            0 0 16px
+            rgba(34, 211, 238, 0.08);
+    }
+
+    50% {
+        box-shadow:
+            0 0 27px
+            rgba(34, 211, 238, 0.18);
+    }
+
+}
+
+
+.secure-floating-connection-button.active
+.secure-floating-icon {
+    animation:
+        secure-active-breathe
+        2.8s
+        ease-in-out
+        infinite;
+}
+
+
+/* ========================================
+   접근성
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .secure-floating-dock,
+    .secure-floating-connection-button.active
+    .secure-floating-icon {
+        animation: none;
+    }
+
+
+    .secure-floating-main,
+    .secure-floating-label,
+    .secure-floating-count,
+    .secure-floating-icon {
+        transition: none;
+    }
+
+}
+
+
+/* ========================================
+   태블릿 / 좁은 화면의 Floating Dock
+
+   플롯 메뉴는 820px 이하에서
+   화면 하단 가로형으로 전환
+   ======================================== */
+
+@media (max-width: 820px) {
+
+    .secure-floating-dock {
+        top: auto;
+
+        right: 12px;
+        bottom: 14px;
+
+        transform: none;
+
+        animation: none;
+    }
+
+
+    .secure-floating-main,
+    .secure-floating-main:hover,
+    .secure-floating-main:focus-within {
+        width: auto;
+
+        flex-direction: row;
+
+        padding: 8px;
+
+        border-radius: 27px;
+
+        transform: none;
+    }
+
+
+    .secure-floating-connection-button {
+        width: 48px;
+
+        min-width: 48px;
+
+        padding: 0 7px;
+    }
+
+
+    .secure-floating-label {
+        display: none;
+    }
+
+
+    /*
+     * 작은 화면에서도
+     * 선택 건수는 세 번째 아이콘 중앙
+     */
+
+    .secure-floating-count,
+    .secure-floating-main:hover
+    .secure-floating-count,
+    .secure-floating-main:focus-within
+    .secure-floating-count {
+        top: 1px;
+
+        left: 50%;
+        right: auto;
+
+        min-width: 28px;
+        height: 17px;
+
+        transform:
+            translateX(-50%);
+
+        font-size: 8px;
+    }
+
+}

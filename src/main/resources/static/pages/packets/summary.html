@@ -1,0 +1,49 @@
+<section class="panel packet-summary-panel">
+
+    <div class="panel-header">
+
+        <div>
+            <h2>패킷 통신 요약</h2>
+
+            <p>
+                선택한 PC에서 수집한
+                DNS·HTTP·HTTPS 통신 정보입니다.
+            </p>
+        </div>
+
+        <p id="packetSummaryStatus">
+            패킷 요약 정보를 불러오는 중입니다.
+        </p>
+
+    </div>
+
+    <div class="packet-summary-grid">
+
+        <article class="packet-summary-card total-card">
+            <span>전체 메타데이터</span>
+            <strong id="packetTotalMetadataCount">0</strong>
+        </article>
+
+        <article class="packet-summary-card external-card">
+            <span>외부 통신</span>
+            <strong id="packetExternalCommunicationCount">0</strong>
+        </article>
+
+        <article class="packet-summary-card dns-card">
+            <span>DNS 도메인</span>
+            <strong id="packetDnsDomainCount">0</strong>
+        </article>
+
+        <article class="packet-summary-card http-card">
+            <span>HTTP Host</span>
+            <strong id="packetHttpHostCount">0</strong>
+        </article>
+
+        <article class="packet-summary-card tls-card">
+            <span>HTTPS TLS SNI</span>
+            <strong id="packetTlsServerNameCount">0</strong>
+        </article>
+
+    </div>
+
+</section>

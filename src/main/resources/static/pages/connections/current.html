@@ -1,0 +1,52 @@
+<section class="network-section current-network-section">
+
+    <div class="section-header">
+        <div>
+            <h2>현재 네트워크 연결</h2>
+            <p>이 PC와 현재 통신 중인 상대방 정보를 표시합니다. 상세 버튼을 누르면 로컬 정보와 판정 근거를 확인할 수 있습니다.</p>
+        </div>
+
+        <div class="network-controls">
+            <input type="search" id="networkSearchInput" placeholder="상대방 IP, 포트, 프로세스 검색">
+
+            <select id="networkStatusFilter">
+                <option value="ALL">전체 연결</option>
+                <option value="ESTABLISHED">연결 중</option>
+                <option value="LISTENING">대기 중</option>
+                <option value="SUSPICIOUS">의심 연결</option>
+                <option value="EXTERNAL">외부 연결</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="network-selection-guide">
+        <span>분석할 항목을 체크하면 다른 화면으로 이동해도 선택 상태가 유지됩니다.</span>
+    </div>
+
+    <div class="table-wrapper network-compact-wrapper">
+        <table class="network-table network-compact-table">
+            <thead>
+                <tr>
+                    <th class="network-select-column">
+                        <input id="networkSelectAllCheckbox" class="network-master-checkbox" type="checkbox" aria-label="현재 연결 전체 선택">
+                    </th>
+                    <th>프로토콜</th>
+                    <th>상대방 IP</th>
+                    <th>상대방 포트</th>
+                    <th>상태</th>
+                    <th>프로세스</th>
+                    <th>외부 IP</th>
+                    <th>의심 여부</th>
+                    <th class="network-detail-column">상세</th>
+                </tr>
+            </thead>
+
+            <tbody id="networkConnectionTableBody">
+                <tr>
+                    <td colspan="9" class="empty-message">네트워크 연결 정보를 불러오는 중입니다.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</section>

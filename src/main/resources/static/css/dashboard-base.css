@@ -1,0 +1,190 @@
+/* SecureAgent 공통 기본 스타일 */
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --background: #0b1120;
+    --panel: #111a2e;
+    --panel-light: #17233b;
+    --border: #263552;
+    --text: #e5edf8;
+    --muted: #8fa0b8;
+    --primary: #38bdf8;
+    --success: #34d399;
+    --warning: #f59e0b;
+    --danger: #fb7185;
+}
+
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(14, 165, 233, 0.12),
+            transparent 35%
+        ),
+        var(--background);
+
+    color: var(--text);
+
+    font-family:
+        "Segoe UI",
+        "Malgun Gothic",
+        sans-serif;
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+
+/* 입력 요소 */
+
+select,
+input {
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    outline: 0;
+
+    background: #0d1628;
+    color: var(--text);
+}
+
+select {
+    min-width: 210px;
+    padding: 11px 36px 11px 13px;
+    cursor: pointer;
+}
+
+input {
+    width: 320px;
+    padding: 11px 13px;
+}
+
+select:focus,
+input:focus {
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 3px rgba(56, 189, 248, 0.12);
+}
+
+input::placeholder {
+    color: #677892;
+}
+
+
+/* 새로고침 버튼 */
+
+#refreshButton {
+    min-width: 110px;
+    padding: 11px 18px;
+
+    border: 0;
+    border-radius: 9px;
+
+    background: var(--primary);
+    color: #03111d;
+
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#refreshButton:hover {
+    background: #7dd3fc;
+}
+
+#refreshButton:disabled {
+    cursor: wait;
+    opacity: 0.65;
+}
+
+
+/* 공통 배지 */
+
+.status-badge,
+.protocol-badge,
+.risk-badge,
+.external-badge,
+.internal-badge,
+.suspicious-badge,
+.safe-badge,
+.active-connection-badge,
+.ended-connection-badge,
+.normal-badge {
+    display: inline-block;
+    padding: 5px 9px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.status-badge {
+    background: rgba(52, 211, 153, 0.13);
+    color: var(--success);
+}
+
+.protocol-badge {
+    background: rgba(129, 140, 248, 0.14);
+    color: #a5b4fc;
+}
+
+.risk-normal,
+.safe-badge,
+.normal-badge {
+    background: rgba(52, 211, 153, 0.14);
+    color: var(--success);
+}
+
+.risk-caution {
+    background: rgba(245, 158, 11, 0.17);
+    color: #fbbf24;
+}
+
+.risk-danger,
+.suspicious-badge,
+.active-connection-badge {
+    background: rgba(251, 113, 133, 0.18);
+    color: var(--danger);
+}
+
+.risk-unknown,
+.internal-badge,
+.ended-connection-badge {
+    background: rgba(143, 160, 184, 0.14);
+    color: var(--muted);
+}
+
+.external-badge {
+    background: rgba(56, 189, 248, 0.15);
+    color: var(--primary);
+}
+
+
+/* 공통 메시지 */
+
+.empty-message {
+    padding: 40px;
+    color: var(--muted);
+    text-align: center;
+}
+
+.error-message {
+    color: var(--danger);
+}

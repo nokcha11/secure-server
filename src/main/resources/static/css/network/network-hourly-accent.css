@@ -1,0 +1,23 @@
+/* 시간대별 연결 그래프 최고점: amber/orange -> rose/red */
+.hourly-bar.is-peak {
+    background: linear-gradient(
+        180deg,
+        #fb7185 0%,
+        #f43f5e 56%,
+        #dc2626 100%
+    );
+
+    box-shadow:
+        0 8px 26px rgba(244, 63, 94, 0.24),
+        0 0 18px rgba(251, 113, 133, 0.1);
+}
+
+.hourly-line-point.is-peak {
+    fill: #f43f5e;
+    stroke: #fecdd3;
+    stroke-width: 3;
+
+    filter: drop-shadow(
+        0 0 5px rgba(244, 63, 94, 0.42)
+    );
+}

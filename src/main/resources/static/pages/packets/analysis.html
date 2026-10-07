@@ -1,0 +1,128 @@
+<section class="panel packet-chart-panel">
+
+    <div class="panel-header">
+
+        <div>
+            <h2>패킷 통신 분석</h2>
+
+            <p>
+                선택한 PC의 최근 패킷 메타데이터를
+                프로토콜·방향·IP·도메인별로 분석합니다.
+            </p>
+        </div>
+
+        <span id="packetChartStatus">
+            패킷 차트 조회 대기
+        </span>
+
+    </div>
+
+    <div class="packet-chart-grid">
+
+        <article class="packet-chart-card">
+
+            <div class="packet-chart-card-header">
+                <div>
+                    <h3>프로토콜 분포</h3>
+
+                    <p>
+                        DNS·HTTP·HTTPS·OTHER의
+                        패킷 수 합계입니다.
+                    </p>
+                </div>
+            </div>
+
+            <div
+                id="packetProtocolChart"
+                class="packet-donut-chart"
+                aria-label="프로토콜별 패킷 분포">
+
+                <p class="packet-chart-empty">
+                    패킷 데이터를 불러오는 중입니다.
+                </p>
+
+            </div>
+
+        </article>
+
+        <article class="packet-chart-card">
+
+            <div class="packet-chart-card-header">
+                <div>
+                    <h3>통신 방향</h3>
+
+                    <p>
+                        INBOUND·OUTBOUND의
+                        통신량 합계입니다.
+                    </p>
+                </div>
+            </div>
+
+            <div
+                id="packetDirectionChart"
+                class="packet-donut-chart"
+                aria-label="통신 방향별 통신량 분포">
+
+                <p class="packet-chart-empty">
+                    패킷 데이터를 불러오는 중입니다.
+                </p>
+
+            </div>
+
+        </article>
+
+        <article class="packet-chart-card">
+
+            <div class="packet-chart-card-header">
+                <div>
+                    <h3>통신량 상위 상대방 IP</h3>
+
+                    <p>
+                        송수신 통신량을 합산한
+                        상대방 IP 상위 5개입니다.
+                    </p>
+                </div>
+            </div>
+
+            <div
+                id="packetTopIpChart"
+                class="packet-ranking-chart"
+                aria-label="통신량이 많은 상대방 IP">
+
+                <p class="packet-chart-empty">
+                    패킷 데이터를 불러오는 중입니다.
+                </p>
+
+            </div>
+
+        </article>
+
+        <article class="packet-chart-card">
+
+            <div class="packet-chart-card-header">
+                <div>
+                    <h3>확인된 도메인 상위 목록</h3>
+
+                    <p>
+                        DNS·HTTP Host·TLS SNI에서
+                        많이 확인된 도메인 상위 5개입니다.
+                    </p>
+                </div>
+            </div>
+
+            <div
+                id="packetTopDomainChart"
+                class="packet-ranking-chart"
+                aria-label="많이 확인된 도메인">
+
+                <p class="packet-chart-empty">
+                    패킷 데이터를 불러오는 중입니다.
+                </p>
+
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
